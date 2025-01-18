@@ -2,13 +2,14 @@ extends Node
 
 var current_level: LevelBase
 var input_controller: InputController
-
 var next_level_scene_path: String = ""
-var main_menu_level_path: String = "res://Levels/System/main_menu_level.tscn"
-var end_game_level_path: String  = "res://Levels/System/end_game_level.tscn"
+var main_menu_level_path: String  = "res://Levels/System/main_menu_level.tscn"
+var end_game_level_path: String   = "res://Levels/System/end_game_level.tscn"
+var current_pause_menu: PauseMenu
 
 
 func _ready():
+    current_pause_menu = null
     process_mode = Node.PROCESS_MODE_ALWAYS
     input_controller = InputController.new()
     add_child(input_controller)
@@ -23,18 +24,28 @@ func set_next_level_scene_path(next_scene_in: String = ""):
 
 
 func load_main_menu():
+    pause_game(false)
     _load_level(main_menu_level_path)
 
 
 func load_end_game():
+    pause_game(false)
     _load_level(end_game_level_path)
 
 
 func restart_level():
-    get_tree().reload_current_scene()
+    await pause_game(false)
+    if not get_tree().current_scene:
+        if current_level != null:
+            get_tree().set_current_scene(current_level)
+            get_tree().reload_current_scene()
+    else:
+        get_tree().reload_current_scene()
     
 
+
 func _load_level(level_path: String):
+    pause_game(false)
     print("Loading level: " + level_path)
     await(current_level.call_deferred("queue_free"))
     var level: Node = load(level_path).instantiate()
@@ -49,12 +60,23 @@ func load_next_level():
         load_end_game()
 
 
+func add_remove_pause_menu(pause: bool):
+    if current_pause_menu != null:
+        await current_pause_menu.call_deferred("queue_free")
+        current_pause_menu = null
+    if pause:
+        current_pause_menu = load("res://UI/pause_menu.tscn").instantiate()
+        current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+        get_tree().get_root().add_child(current_pause_menu)
+
+
 func pause_game(pause: bool):
+    add_remove_pause_menu(pause)
     if pause:
         get_tree().paused = true
     else:
         get_tree().paused = false
 
-
+    
 func toggle_pause_game():
     pause_game(not get_tree().paused)
