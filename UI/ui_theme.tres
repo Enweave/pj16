@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://kk1r6jsfbwjt"]
+
+[ext_resource type="StyleBox" uid="uid://2xwscq7m0ruv" path="res://UI/button_stylebox.tres" id="1_so5tc"]
+
+[resource]
+Button/styles/normal = ExtResource("1_so5tc")
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16

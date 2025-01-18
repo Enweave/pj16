@@ -2,6 +2,8 @@ extends Node
 
 var current_level: LevelBase
 var next_level_scene_path: String = ""
+var main_menu_level_path: String = "res://Levels/System/main_menu_level.tscn"
+var end_game_level_path: String  = "res://Levels/System/end_game_level.tscn"
 
 
 func _ready():
@@ -16,17 +18,31 @@ func set_next_level_scene_path(next_scene_in: String = ""):
     next_level_scene_path = next_scene_in
 
 
+func load_main_menu():
+    _load_level(main_menu_level_path)
+
+
+func load_end_game():
+    _load_level(end_game_level_path)
+
+
 func restart_level():
     get_tree().reload_current_scene()
+    
+
+func _load_level(level_path: String):
+    print("Loading level: " + level_path)
+    await(current_level.call_deferred("queue_free"))
+    var level: Node = load(level_path).instantiate()
+    get_tree().get_root().add_child(level)
 
 
 func load_next_level():
     if next_level_scene_path != "":
-        var next_level: Node = load(next_level_scene_path).instantiate()
-        await current_level.call_deferred("queue_free")
-        get_tree().get_root().add_child(next_level)
+        _load_level(next_level_scene_path)
     else:
         print("No next level scene set")
+        load_end_game()
 
 
 func pause_game(pause: bool):

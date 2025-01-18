@@ -13,9 +13,8 @@ class_name LevelBase
 
 @export var next_level_path: String
 
-
 func _ready():
-    FlowControllerAutoload.set_current_level(self)
-
-    if next_level_path != null:
-        FlowControllerAutoload.set_next_level_scene_path(next_level_path)
+    if Engine.is_editor_hint() == false:
+        FlowControllerAutoload.set_current_level(self)
+        if next_level_path != null:
+            FlowControllerAutoload.set_next_level_scene_path(next_level_path)

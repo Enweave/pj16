@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://co2o6cog4q2pu"]
+
+[ext_resource type="Script" path="res://Levels/System/main_menu_level.gd" id="1_d4rfw"]
+[ext_resource type="PackedScene" uid="uid://icqjxc7bco31" path="res://Levels/Sandbox/test_1.tscn" id="2_wwx77"]
+
+[node name="MainMenuLevel" type="Node"]
+script = ExtResource("1_d4rfw")
+next_level_scene = ExtResource("2_wwx77")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Game Title go here
+
+"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StartGameButton" type="Button" parent="Margin/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start game"
+
+[connection signal="pressed" from="Margin/VBoxContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
