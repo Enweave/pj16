@@ -1,6 +1,8 @@
 extends Node
 
 var current_level: LevelBase
+var input_controller: InputController
+
 var next_level_scene_path: String = ""
 var main_menu_level_path: String = "res://Levels/System/main_menu_level.tscn"
 var end_game_level_path: String  = "res://Levels/System/end_game_level.tscn"
@@ -8,6 +10,8 @@ var end_game_level_path: String  = "res://Levels/System/end_game_level.tscn"
 
 func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
+    input_controller = InputController.new()
+    add_child(input_controller)
 
 
 func set_current_level(current_level_in: LevelBase = null):
@@ -52,7 +56,5 @@ func pause_game(pause: bool):
         get_tree().paused = false
 
 
-func _unhandled_input(event):
-    if event is InputEventKey:
-        if event.is_action_pressed("input_Pause"):
-            pause_game(not get_tree().paused)
+func toggle_pause_game():
+    pause_game(not get_tree().paused)
