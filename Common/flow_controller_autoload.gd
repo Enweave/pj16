@@ -9,99 +9,97 @@ var current_pause_menu: PauseMenu
 var viewport_container: SubViewportContainer
 var viewport: SubViewport
 
+
 func _ready():
-	current_pause_menu = null
-	process_mode = Node.PROCESS_MODE_ALWAYS
-	input_controller = InputController.new()
-	add_child(input_controller)
-	# create a sub-viewport to contain levels
-	viewport_container = SubViewportContainer.new()
-	viewport_container.set_visible(false)
-	viewport = SubViewport.new()
-	
-	await get_tree().get_root().call_deferred("add_child", viewport_container)
-	await viewport_container.call_deferred("add_child", viewport)
-	viewport_container.set_mouse_filter(Control.MOUSE_FILTER_STOP)
-	viewport_container.focus_mode = Control.FOCUS_ALL
-	
-	viewport.size = Constants.INTERNAL_RESOLUTION
-	viewport.handle_input_locally = true
-	viewport.canvas_item_default_texture_filter = 0 # DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST 
-	
-	get_tree().create_timer(0.3).timeout.connect(_on_timeout)
-#	viewport_container.set_visible(true)
+    current_pause_menu = null
+    process_mode = Node.PROCESS_MODE_ALWAYS
+    input_controller = InputController.new()
+    add_child(input_controller)
+    viewport_container = SubViewportContainer.new()
+    viewport_container.set_visible(false)
+    viewport = SubViewport.new()
+
+    await get_tree().get_root().call_deferred("add_child", viewport_container)
+    await viewport_container.call_deferred("add_child", viewport)
+    viewport_container.set_mouse_filter(Control.MOUSE_FILTER_STOP)
+    viewport_container.focus_mode = Control.FOCUS_ALL
+
+    viewport.size = Constants.INTERNAL_RESOLUTION
+    viewport.handle_input_locally = true
+    viewport.canvas_item_default_texture_filter = 0 # DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST 
+
+    get_tree().create_timer(0.3).timeout.connect(_on_timeout)
 
 
 func _on_timeout():
-	viewport_container.set_visible(true)
+    viewport_container.set_visible(true)
+
 
 func set_current_level(current_level_in: LevelBase = null):
-	current_level = current_level_in
-	# move level to sub-viewport
-	current_level.call_deferred("reparent", viewport, false)
+    current_level = current_level_in
+    current_level.call_deferred("reparent", viewport, false)
 
 
 func set_player_character(player_character_in: CharacterBase = null):
-	input_controller.set_current_character(player_character_in)
+    input_controller.set_current_character(player_character_in)
 
 
 func set_next_level_scene_path(next_scene_in: String = ""):
-	next_level_scene_path = next_scene_in
+    next_level_scene_path = next_scene_in
 
 
 func load_main_menu():
-	pause_game(false)
-	_load_level(main_menu_level_path)
+    pause_game(false)
+    _load_level(main_menu_level_path)
 
 
 func load_end_game():
-	pause_game(false)
-	_load_level(end_game_level_path)
+    pause_game(false)
+    _load_level(end_game_level_path)
 
 
 func restart_level():
-	await pause_game(false)
-	if current_level != null:
-		# reinstantiate current level
-		var level_path: String = current_level.scene_file_path
-		await current_level.call_deferred("queue_free")
-		_load_level(level_path)
-
+    await pause_game(false)
+    if current_level != null:
+        # reinstantiate current level
+        var level_path: String = current_level.scene_file_path
+        await current_level.call_deferred("queue_free")
+        _load_level(level_path)
 
 
 func _load_level(level_path: String):
-	pause_game(false)
-	print("Loading level: " + level_path)
-	await(current_level.call_deferred("queue_free"))
-	var level: Node = load(level_path).instantiate()
-	viewport.add_child(level)
+    pause_game(false)
+    print("Loading level: " + level_path)
+    await(current_level.call_deferred("queue_free"))
+    var level: Node = load(level_path).instantiate()
+    viewport.add_child(level)
 
 
 func load_next_level():
-	if next_level_scene_path != "":
-		_load_level(next_level_scene_path)
-	else:
-		print("No next level scene set")
-		load_end_game()
+    if next_level_scene_path != "":
+        _load_level(next_level_scene_path)
+    else:
+        print("No next level scene set")
+        load_end_game()
 
 
 func add_remove_pause_menu(pause: bool):
-	if current_pause_menu != null:
-		await current_pause_menu.call_deferred("queue_free")
-		current_pause_menu = null
-	if pause:
-		current_pause_menu = load("res://UI/pause_menu.tscn").instantiate()
-		current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
-		get_tree().get_root().add_child(current_pause_menu)
+    if current_pause_menu != null:
+        await current_pause_menu.call_deferred("queue_free")
+        current_pause_menu = null
+    if pause:
+        current_pause_menu = load("res://UI/pause_menu.tscn").instantiate()
+        current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+        get_tree().get_root().add_child(current_pause_menu)
 
-		
+
 func pause_game(pause: bool):
-	add_remove_pause_menu(pause)
-	if pause:
-		get_tree().paused = true
-	else:
-		get_tree().paused = false
+    add_remove_pause_menu(pause)
+    if pause:
+        get_tree().paused = true
+    else:
+        get_tree().paused = false
 
-	
+
 func toggle_pause_game():
-	pause_game(not get_tree().paused)
+    pause_game(not get_tree().paused)
