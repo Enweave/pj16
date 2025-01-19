@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 FlowControllerAutoload="*res://Common/flow_controller_autoload.gd"
+Constants="*res://Common/constants.gd"
 
 [display]
 
