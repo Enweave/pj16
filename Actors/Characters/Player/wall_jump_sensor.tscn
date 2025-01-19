@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgwglquecixj4"]
+
+[ext_resource type="Script" path="res://Actors/Characters/Player/wall_jump_sensor.gd" id="1_nycsu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_26up6"]
+radius = 5.0
+height = 24.0
+
+[node name="WallJumpSensor" type="Node2D"]
+script = ExtResource("1_nycsu")
+
+[node name="WallSensorRight" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(6, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallSensorRight"]
+shape = SubResource("CapsuleShape2D_26up6")
+
+[node name="WallSensorLeft" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-6, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallSensorLeft"]
+shape = SubResource("CapsuleShape2D_26up6")
