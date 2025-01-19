@@ -1,77 +1,34 @@
 [gd_scene load_steps=6 format=3 uid="uid://icqjxc7bco31"]
 
 [ext_resource type="Script" path="res://Common/level_base.gd" id="1_5nkw1"]
-[ext_resource type="Script" path="res://Levels/Sandbox/next_level_button.gd" id="2_1yh2a"]
+[ext_resource type="PackedScene" uid="uid://cax7o3s63lcar" path="res://Actors/Characters/Player/player_character.tscn" id="2_1bqeb"]
 
-[sub_resource type="Animation" id="Animation_oyulr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Button:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kug8u"]
+size = Vector2(34.5, 22.25)
 
-[sub_resource type="Animation" id="Animation_kraa0"]
-resource_name = "new_animation"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Button:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.245, 1.245)]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3exa7"]
+size = Vector2(281, 20)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_occop"]
-_data = {
-"RESET": SubResource("Animation_oyulr"),
-"new_animation": SubResource("Animation_kraa0")
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyp3o"]
+size = Vector2(34.5, 104.5)
 
 [node name="Test1" type="Node"]
 script = ExtResource("1_5nkw1")
-next_level_path = "res://Levels/Sandbox/test_2.tscn"
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Player" parent="." instance=ExtResource("2_1bqeb")]
+position = Vector2(171, 129)
 
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "level1"
-script = ExtResource("2_1yh2a")
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(38, 189)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
-libraries = {
-"": SubResource("AnimationLibrary_occop")
-}
-autoplay = "new_animation"
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(66, -23)
+shape = SubResource("RectangleShape2D_kug8u")
 
-[connection signal="pressed" from="Control/Button" to="Control/Button" method="_on_pressed"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(130.5, 0)
+shape = SubResource("RectangleShape2D_3exa7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(253, -63)
+shape = SubResource("RectangleShape2D_fyp3o")
