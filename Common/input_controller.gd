@@ -1,6 +1,7 @@
 ﻿extends Node
 class_name InputController
 
+var current_character: CharacterBase = null
 enum InputActions {
     Pause,
     MoveUp,
@@ -28,7 +29,24 @@ var input_actions: Dictionary = {
 }
 
 
+func set_current_character(character: CharacterBase = null) -> void:
+    current_character = character
+
+
+func _process(_delta: float) -> void:
+    if current_character != null:
+
+        var direction_x: float = Input.get_axis(input_actions[InputActions.MoveLeft], input_actions[InputActions.MoveRight])
+        var direction_y: float = Input.get_axis(input_actions[InputActions.MoveUp], input_actions[InputActions.MoveDown])
+
+        current_character.set_control_direction(Vector2(direction_x, direction_y))
+
+        if Input.is_action_just_pressed(input_actions[InputActions.Jump]):
+            current_character.trigger_jump()
+
+
 func _unhandled_input(event):
     if event is InputEventKey:
         if event.is_action_pressed(input_actions[InputActions.Pause]):
             FlowControllerAutoload.toggle_pause_game()
+            
