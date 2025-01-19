@@ -13,11 +13,11 @@ var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") 
 @export var TERMINAL_VELOCITY_VERTICAL: float = 400
 
 var _use_control_direction: bool       = true
-var _deceleration: float               = SPEED/8
+@onready var _deceleration: float               = SPEED/8
 var _control_direction: Vector2        = Vector2.ZERO
 var _control_direction_latent: Vector2 = Vector2.ZERO
 var _control_direction_scale: float    = 1
-var _gravity_scale: float              = GRAVITY_SCALE
+@onready var _gravity_scale: float              = GRAVITY_SCALE
 
 @export_group("Jump")
 @export var JUMP_FORCE: float = 300.
@@ -30,12 +30,12 @@ var _gravity_scale: float              = GRAVITY_SCALE
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var WALL_JUMP_FORCE_X: float = 338.
 
-var _jump_num_max: int        = JUMP_NUM_MAX
+@onready var _jump_num_max: int        = JUMP_NUM_MAX
 var _jump_triggered: bool     = false
 var _coyote_active: bool      = false
 var _wall_coyote_active: bool = false
-var _jumps_left: int          = JUMP_NUM_MAX
-var _wall_jump_enabled: bool  = WALL_JUMP_ENABLED
+@onready var _jumps_left: int          = JUMP_NUM_MAX
+@onready var _wall_jump_enabled: bool  = WALL_JUMP_ENABLED
 var _wall_direction: float    = 0
 
 @export_group("Misc")
@@ -104,14 +104,15 @@ func _update_jump_conditions(_delta: float) -> void:
         if _coyote_timer.paused:
             _coyote_timer.set_paused(false)
             _coyote_timer.start()
-
-    if _is_colliding_wall():
-        _wall_coyote_active = true
-        _wall_coyote_timer.set_paused(true)
-    else:
-        if _wall_coyote_timer.paused:
-            _wall_coyote_timer.set_paused(false)
-            _wall_coyote_timer.start()
+    
+    if _wall_jump_enabled:
+        if _is_colliding_wall():
+            _wall_coyote_active = true
+            _wall_coyote_timer.set_paused(true)
+        else:
+            if _wall_coyote_timer.paused:
+                _wall_coyote_timer.set_paused(false)
+                _wall_coyote_timer.start()
 
 
 func _on_buffer_jump_timeout() -> void:
