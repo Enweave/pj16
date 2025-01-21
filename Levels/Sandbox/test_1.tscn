@@ -33,3 +33,11 @@ shape = SubResource("RectangleShape2D_3exa7")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(253, -63)
 shape = SubResource("RectangleShape2D_fyp3o")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(156, -133)
+shape = SubResource("RectangleShape2D_fyp3o")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(251, -212)
+shape = SubResource("RectangleShape2D_fyp3o")
