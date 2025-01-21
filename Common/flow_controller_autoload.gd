@@ -3,9 +3,11 @@ extends Node
 var current_level: LevelBase
 var input_controller: InputController
 var next_level_scene_path: String = ""
-var main_menu_level_path: String  = "res://Levels/System/main_menu_level.tscn"
-var end_game_level_path: String   = "res://Levels/System/end_game_level.tscn"
+const main_menu_level_path: String  = "res://Levels/System/main_menu_level.tscn"
+const end_game_level_path: String   = "res://Levels/System/end_game_level.tscn"
+const game_over_widget_path: String = "res://UI/Widgets/gameover_widget.tscn"
 var current_pause_menu: PauseMenu
+var current_game_over_widget: GameoverWidget
 var viewport_container: SubViewportContainer
 var viewport: SubViewport
 
@@ -33,6 +35,7 @@ func _ready():
 
 func _on_timeout():
     viewport_container.set_visible(true)
+    get_tree().get_root().move_child(viewport_container, 0)
 
 
 func set_current_level(current_level_in: LevelBase = null):
@@ -69,8 +72,14 @@ func restart_level():
 
 func _load_level(level_path: String):
     pause_game(false)
+    _toggle_gameover_widet(false)
     print("Loading level: " + level_path)
-    await(current_level.call_deferred("queue_free"))
+
+    if current_level == null:
+        # get current scene
+        get_tree().get_current_scene().call_deferred("queue_free")
+    else:
+        await(current_level.call_deferred("queue_free"))
     var level: Node = load(level_path).instantiate()
     viewport.add_child(level)
 
@@ -91,6 +100,21 @@ func add_remove_pause_menu(pause: bool):
         current_pause_menu = load("res://UI/pause_menu.tscn").instantiate()
         current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
         get_tree().get_root().add_child(current_pause_menu)
+
+
+func _toggle_gameover_widet(show: bool):
+    if current_game_over_widget != null:
+        await current_game_over_widget.call_deferred("queue_free")
+        current_game_over_widget = null
+    if show:
+        current_game_over_widget = load(game_over_widget_path).instantiate()
+        current_game_over_widget.process_mode = Node.PROCESS_MODE_ALWAYS
+        get_tree().get_root().add_child(current_game_over_widget)
+
+
+func game_over():
+    get_tree().paused = true
+    _toggle_gameover_widet(true)
 
 
 func pause_game(pause: bool):
