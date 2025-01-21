@@ -10,10 +10,10 @@ var _max_health: float    = 10.
 var current_health: float
 var is_invulnerable: bool = false
 var is_dead: bool         = false
-var element: Constants.Elements = 0
+var element: Constants.Elements = Constants.Elements.None
 
-func _init(max_health: float) -> void:
-    _max_health = max_health
+func _init(in_max_health: float, in_element: Constants.Elements = Constants.Elements.None) -> void:
+    _max_health = in_max_health
     current_health = _max_health
 
 

@@ -12,31 +12,36 @@ var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") 
 @export var TERMINAL_VELOCITY_HORIZONTAL: float = 500
 @export var TERMINAL_VELOCITY_VERTICAL: float = 400
 
-var _use_control_direction: bool       = true
-@onready var _deceleration: float               = SPEED/8
+var _use_control_direction: bool = true
+
+@onready var _deceleration: float      = SPEED/8
+
 var _control_direction: Vector2        = Vector2.ZERO
 var _control_direction_latent: Vector2 = Vector2.ZERO
 var _control_direction_scale: float    = 1
-@onready var _gravity_scale: float              = GRAVITY_SCALE
+
+@onready var _gravity_scale: float = GRAVITY_SCALE
 
 @export_group("Jump")
 @export var JUMP_FORCE: float = 300.
 @export var JUMP_NUM_MAX: int = 1
 @export var JUMP_INPUT_BUFFER_TIME: float = 0.05
 @export var JUMP_COYOTE_TIME: float = 0.2
-
 @export_group("Wall Jump")
 @export var WALL_JUMP_ENABLED: bool = false
 @export var WALL_JUMP_FORCE_Y: float = 275.
 @export var WALL_JUMP_FORCE_X: float = 338.
 
-@onready var _jump_num_max: int        = JUMP_NUM_MAX
-var _jump_triggered: bool     = false
-var _coyote_active: bool      = false
-var _wall_coyote_active: bool = false
-@onready var _jumps_left: int          = JUMP_NUM_MAX
-@onready var _wall_jump_enabled: bool  = WALL_JUMP_ENABLED
-var _wall_direction: float    = 0
+@onready var _jump_num_max: int = JUMP_NUM_MAX
+
+var _jump_triggered: bool       = false
+var _coyote_active: bool        = false
+var _wall_coyote_active: bool   = false
+
+@onready var _jumps_left: int = JUMP_NUM_MAX
+@onready var _wall_jump_enabled: bool = WALL_JUMP_ENABLED
+
+var _wall_direction: float            = 0
 
 @export_group("Misc")
 @export var PUSH_RIGID_BODIES: bool = false
@@ -104,7 +109,7 @@ func _update_jump_conditions(_delta: float) -> void:
         if _coyote_timer.paused:
             _coyote_timer.set_paused(false)
             _coyote_timer.start()
-    
+
     if _wall_jump_enabled:
         if _is_colliding_wall():
             _wall_coyote_active = true
@@ -194,7 +199,8 @@ func set_control_direction(direction: Vector2) -> void:
 
 func set_wall_direction(in_wall_direction: float) -> void:
     _wall_direction = in_wall_direction
-    
+
+
 func set_use_control_direction(in_use_control_direction: bool) -> void:
     _use_control_direction = in_use_control_direction
 

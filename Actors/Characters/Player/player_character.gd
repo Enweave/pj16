@@ -1,4 +1,4 @@
-extends CharacterBase
+extends CharacterWithHealth
 
 class_name PlayerCharacter
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rxaoah3y6pqt"]
+
+[ext_resource type="Script" path="res://Common/Framework/character_base.gd" id="1_msqsg"]
+
+[node name="CharacterWithHealth" type="CharacterBody2D"]
+script = ExtResource("1_msqsg")
