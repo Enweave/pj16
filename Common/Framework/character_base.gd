@@ -79,6 +79,12 @@ func _ready():
     add_child(_jump_buffer_timer)
 
 
+func activate_current_feature() -> bool:
+    return false
+
+func deactivate_current_feature() -> void:
+    pass    
+
 func _apply_jump_force() -> void:
     if WALL_JUMP_ENABLED:
         if _wall_coyote_active and _wall_direction != 0:

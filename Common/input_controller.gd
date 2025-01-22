@@ -43,7 +43,13 @@ func _process(_delta: float) -> void:
 
         if Input.is_action_just_pressed(input_actions[InputActions.Jump]):
             current_character.trigger_jump()
-
+            
+        if Input.is_action_just_pressed(input_actions[InputActions.Fire]):
+            current_character.activate_current_feature()
+        
+        if Input.is_action_just_released(input_actions[InputActions.Fire]):
+            current_character.deactivate_current_feature()
+            
 
 func _unhandled_input(event):
     if event is InputEventKey:

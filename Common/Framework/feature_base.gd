@@ -29,8 +29,6 @@ func activate() -> bool:
 
 func deactivate() -> void:
     _active = false
-    _wind_up_timer.stop()
-    _cooldown_timer.stop()
 
 
 func reset() -> void:
@@ -82,8 +80,6 @@ func _activate() -> void:
 
 
 func _on_wind_up_timer_timeout() -> void:
-    if !_active:
-        return
     Activation.emit()
     if _cooldown_time > 0:
         _cooldown_timer.start()
@@ -92,8 +88,6 @@ func _on_wind_up_timer_timeout() -> void:
 
 
 func _on_cooldown_timer_timeout() -> void:
-    if !_active:
-        return
     CooldownPassed.emit()
 
     if _auto_reactivate:
