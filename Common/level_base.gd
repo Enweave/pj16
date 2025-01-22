@@ -12,6 +12,8 @@ class_name LevelBase
 		next_level_scene = null
 
 @export var next_level_path: String
+@export var allow_pause_menu: bool = true
+
 
 func _ready():
 	if Engine.is_editor_hint() == false:

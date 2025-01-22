@@ -6,6 +6,8 @@
 [node name="MainMenuLevel" type="Node"]
 script = ExtResource("1_d4rfw")
 next_level_scene = ExtResource("2_wwx77")
+allow_pause_menu = false
+display_ingame_ui = null
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15

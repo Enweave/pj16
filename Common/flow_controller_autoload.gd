@@ -2,14 +2,18 @@ extends Node
 
 var current_level: LevelBase
 var input_controller: InputController
-var next_level_scene_path: String = ""
+var next_level_scene_path: String   = ""
 const main_menu_level_path: String  = "res://Levels/System/main_menu_level.tscn"
 const end_game_level_path: String   = "res://Levels/System/end_game_level.tscn"
 const game_over_widget_path: String = "res://UI/Widgets/gameover_widget.tscn"
+const pause_menu_path: String       = "res://UI/pause_menu.tscn"
+const ingame_ui_path: String        = "res://UI/ingame_ui.tscn"
 var current_pause_menu: PauseMenu
 var current_game_over_widget: GameoverWidget
 var viewport_container: SubViewportContainer
 var viewport: SubViewport
+var ingame_ui: IngameUI
+var pause_menu_allowed: bool        = true
 
 
 func _ready():
@@ -41,10 +45,16 @@ func _on_timeout():
 func set_current_level(current_level_in: LevelBase = null):
     current_level = current_level_in
     current_level.call_deferred("reparent", viewport, false)
+    pause_menu_allowed = current_level.allow_pause_menu
 
 
-func set_player_character(player_character_in: CharacterBase = null):
+func set_player_character(player_character_in: PlayerCharacter = null):
     input_controller.set_current_character(player_character_in)
+    if ingame_ui == null:
+        ingame_ui = load(ingame_ui_path).instantiate()
+        await get_tree().get_root().call_deferred("add_child", ingame_ui)
+    ingame_ui.assign_player_character(player_character_in)
+    ingame_ui.toggle_visibility(true)
 
 
 func set_next_level_scene_path(next_scene_in: String = ""):
@@ -71,6 +81,8 @@ func restart_level():
 
 
 func _load_level(level_path: String):
+    if ingame_ui != null:
+        ingame_ui.toggle_visibility(false)
     pause_game(false)
     _toggle_gameover_widet(false)
     print("Loading level: " + level_path)
@@ -82,7 +94,7 @@ func _load_level(level_path: String):
         await(current_level.call_deferred("queue_free"))
     var level: Node = load(level_path).instantiate()
     viewport.add_child(level)
-
+    
 
 func load_next_level():
     if next_level_scene_path != "":
@@ -96,8 +108,8 @@ func add_remove_pause_menu(pause: bool):
     if current_pause_menu != null:
         await current_pause_menu.call_deferred("queue_free")
         current_pause_menu = null
-    if pause:
-        current_pause_menu = load("res://UI/pause_menu.tscn").instantiate()
+    if pause and pause_menu_allowed:
+        current_pause_menu = load(pause_menu_path).instantiate()
         current_pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
         get_tree().get_root().add_child(current_pause_menu)
 
@@ -120,7 +132,8 @@ func game_over():
 func pause_game(pause: bool):
     add_remove_pause_menu(pause)
     if pause:
-        get_tree().paused = true
+        if pause_menu_allowed:
+            get_tree().paused = true
     else:
         get_tree().paused = false
 

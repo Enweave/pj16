@@ -4,6 +4,7 @@
 
 [node name="EndGameLevel" type="Node"]
 script = ExtResource("1_w8mwq")
+allow_pause_menu = false
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
