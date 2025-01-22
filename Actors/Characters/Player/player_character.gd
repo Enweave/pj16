@@ -7,7 +7,10 @@ class_name PlayerCharacter
 func _ready() -> void:
     super._ready()
     FlowControllerAutoload.set_player_character(self)
+    health_component.OnDeath.connect(_on_death)
     
+func _on_death() -> void:
+    FlowControllerAutoload.game_over()
     
 func _is_colliding_wall() -> bool:
     if is_on_floor():

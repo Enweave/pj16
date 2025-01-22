@@ -23,5 +23,5 @@ func assign_player_character(in_player_character: PlayerCharacter = null) -> voi
 	_update_health_display()
 	
 	
-func _update_health_display() -> void:
+func _update_health_display(_amount: float = 0) -> void:
 	health_label.text = str(player_character.health_component.current_health)

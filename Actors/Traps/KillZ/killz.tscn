@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cymlx1q7iwg1x"]
 
-[ext_resource type="Script" path="res://Actors/Traps/killz.gd" id="1_b8ws7"]
+[ext_resource type="Script" path="res://Actors/Traps/KillZ/killz.gd" id="1_b8ws7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_evu0g"]
 

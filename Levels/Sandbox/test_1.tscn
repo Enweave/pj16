@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://icqjxc7bco31"]
+[gd_scene load_steps=8 format=3 uid="uid://icqjxc7bco31"]
 
 [ext_resource type="Script" path="res://Common/level_base.gd" id="1_5nkw1"]
 [ext_resource type="PackedScene" uid="uid://cax7o3s63lcar" path="res://Actors/Characters/Player/player_character.tscn" id="2_1bqeb"]
-[ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/killz.tscn" id="3_tmona"]
+[ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/KillZ/killz.tscn" id="3_tmona"]
+[ext_resource type="PackedScene" uid="uid://cub1qdpxl8bh0" path="res://Actors/Traps/ContactDamageTrap/contact_damage_trap.tscn" id="4_wasti"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kug8u"]
 size = Vector2(34.5, 22.25)
@@ -45,3 +46,6 @@ shape = SubResource("RectangleShape2D_fyp3o")
 
 [node name="Killz" parent="." instance=ExtResource("3_tmona")]
 position = Vector2(-42, 263)
+
+[node name="ContactDamage" parent="." instance=ExtResource("4_wasti")]
+position = Vector2(196, 154)
