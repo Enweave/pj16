@@ -18,5 +18,6 @@ func _on_activation() -> void:
 			if instigator is CharacterBase:
 				var character: CharacterBase = instigator as CharacterBase
 				new_control_direction.x = character.get_latent_control_direction().x
+				new_control_direction.y = character.get_latent_control_direction().y
 		projectile.aim_and_fire(instigator, new_control_direction, Vector2.ZERO, null)
 		

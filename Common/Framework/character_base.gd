@@ -9,8 +9,8 @@ var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") 
 @export_range(0., 1.) var AIR_FRICTION: float = 0.9
 @export var ACCELERATION: float = 30
 @export_range(0., 1.)var GRAVITY_SCALE: float = 1
-@export var TERMINAL_VELOCITY_HORIZONTAL: float = 500
-@export var TERMINAL_VELOCITY_VERTICAL: float = 400
+@export_range(0., Constants.TERMINAL_VELOCITY)var TERMINAL_VELOCITY_HORIZONTAL: float = 500
+@export_range(0., Constants.TERMINAL_VELOCITY) var TERMINAL_VELOCITY_VERTICAL: float = 400
 
 var _use_control_direction: bool = true
 
@@ -183,6 +183,10 @@ func _physics_process(delta):
     if PUSH_RIGID_BODIES:
         _push_rigid_bodies(delta)
 
+func _set_latent_control_direction(in_direction: Vector2) -> void:
+    if in_direction.x != 0:
+        _control_direction_latent.x = in_direction.x
+    _control_direction_latent.y = in_direction.y
 
 func trigger_jump() -> void:
     var result: bool = _try_perform_jump()
@@ -190,17 +194,14 @@ func trigger_jump() -> void:
         if !_jump_triggered:
             _jump_triggered = true
             _jump_buffer_timer.start()
+            
+            
+func set_control_direction(in_direction: Vector2) -> void:
+    _control_direction.x = clamp(in_direction.x, -1, 1)
+    _control_direction.y = clamp(in_direction.y, -1, 1)
 
-
-func set_control_direction(direction: Vector2) -> void:
-    _control_direction.x = clamp(direction.x, -1, 1)
-    _control_direction.y = clamp(direction.y, -1, 1)
-    
-    if direction.x != 0:
-        _control_direction_latent.x = direction.x
-    if direction.y != 0:
-        _control_direction_latent.y = direction.y
-        
+    _set_latent_control_direction(_control_direction)
+     
     if is_on_floor():
         _control_direction_inertial = Vector2.ZERO
     else:
@@ -209,6 +210,8 @@ func set_control_direction(direction: Vector2) -> void:
         if _control_direction.y != 0:
             _control_direction_inertial.y = _control_direction.y
 
+            
+        
 func get_latent_control_direction() -> Vector2:
     return _control_direction_latent
         
