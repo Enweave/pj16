@@ -10,7 +10,6 @@ var _initialized: bool     = false
 var _auto_reactivate: bool = false
 var _active: bool          = false
 var _trigger_down: bool    = false
-
 signal Windup
 signal Activation
 signal CooldownPassed
@@ -44,36 +43,38 @@ func initialize(in_wind_up_time: float, in_cooldown_time: float, in_cost: float,
         return
     _initialized = true
     _wind_up_timer = Timer.new()
-    
-    if _wind_up_time > 0:
+
+    _wind_up_time = in_wind_up_time
+    if in_wind_up_time > 0:
         _wind_up_timer.wait_time = in_wind_up_time
-        _wind_up_time = in_wind_up_time
-    _wind_up_timer.wait_time = in_wind_up_time
+
     _wind_up_timer.one_shot = true
     _wind_up_timer.timeout.connect(_on_wind_up_timer_timeout)
 
     _cooldown_timer = Timer.new()
-    
-    if _cooldown_time > 0:
+
+    _cooldown_time = in_cooldown_time
+    if in_cooldown_time > 0:
         _cooldown_timer.wait_time = in_cooldown_time
-        _cooldown_time = in_cooldown_time
+
     _cooldown_timer.one_shot = true
     _cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
 
     _cost = in_cost
     _auto_reactivate = in_auto_reactivate
-    
+
     await call_deferred("add_child", _wind_up_timer)
     await call_deferred("add_child", _cooldown_timer)
 
 
 func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: float, in_auto_reactivate: bool) -> void:
+    _wind_up_time = in_wind_up_time
     if in_wind_up_time > 0:
         _wind_up_timer.wait_time = in_wind_up_time
-        _wind_up_time = in_wind_up_time
+    _cooldown_time = in_cooldown_time
     if in_cooldown_time > 0:
         _cooldown_timer.wait_time = in_cooldown_time
-        _cooldown_time = in_cooldown_time
+
     _cost = in_cost
     _auto_reactivate = in_auto_reactivate
 
