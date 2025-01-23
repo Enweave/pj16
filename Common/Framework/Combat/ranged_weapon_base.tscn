@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://chhxisujjyp0q"]
+
+[ext_resource type="Script" path="res://Common/Framework/Combat/ranged_weapon_base.gd" id="1_iag3j"]
+[ext_resource type="PackedScene" uid="uid://bodu36whe25b2" path="res://Common/Framework/Combat/projectile_base.tscn" id="2_146co"]
+
+[node name="RangedWeaponBase" type="Node2D"]
+script = ExtResource("1_iag3j")
+projectile_scene = ExtResource("2_146co")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(10, 0)
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -15.0
+offset_top = -44.0
+offset_right = 15.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1

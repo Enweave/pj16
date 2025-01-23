@@ -80,6 +80,12 @@ func restart_level():
         _load_level(level_path)
 
 
+func add_child_to_level(child: Node):
+    if current_level != null:
+        await (current_level.call_deferred("add_child", child))
+    else:
+        await (get_tree().get_current_scene().call_deferred("add_child", child))
+
 func _load_level(level_path: String):
     if ingame_ui != null:
         ingame_ui.toggle_visibility(false)

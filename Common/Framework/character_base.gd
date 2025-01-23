@@ -5,10 +5,10 @@ var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") 
 
 @export_group("Movement")
 @export var SPEED: float = 200
-@export var AIR_CONTROL: float = 1
-@export var AIR_FRICTION: float = 0.9
+@export_range(0., 1.) var AIR_CONTROL: float = 1
+@export_range(0., 1.) var AIR_FRICTION: float = 0.9
 @export var ACCELERATION: float = 30
-@export var GRAVITY_SCALE: float = 1
+@export_range(0., 1.)var GRAVITY_SCALE: float = 1
 @export var TERMINAL_VELOCITY_HORIZONTAL: float = 500
 @export var TERMINAL_VELOCITY_VERTICAL: float = 400
 
@@ -16,8 +16,9 @@ var _use_control_direction: bool = true
 
 @onready var _deceleration: float      = SPEED/8
 
-var _control_direction: Vector2        = Vector2.ZERO
-var _control_direction_latent: Vector2 = Vector2.ZERO
+var _control_direction: Vector2          = Vector2.ZERO
+var _control_direction_inertial: Vector2 = Vector2.ZERO
+var _control_direction_latent: Vector2   = Vector2.RIGHT
 var _control_direction_scale: float    = 1
 
 @onready var _gravity_scale: float = GRAVITY_SCALE
@@ -45,7 +46,7 @@ var _wall_direction: float            = 0
 
 @export_group("Misc")
 @export var PUSH_RIGID_BODIES: bool = false
-@export var PUSH_RIGID_BODIES_FORCE: int = 2
+@export var PUSH_RIGID_BODIES_FORCE: float = 2
 signal jump_started
 signal landed
 var _jump_buffer_timer: Timer
@@ -88,7 +89,7 @@ func deactivate_current_feature() -> void:
 func _apply_jump_force() -> void:
     if WALL_JUMP_ENABLED:
         if _wall_coyote_active and _wall_direction != 0:
-            _control_direction_latent.x = -_wall_direction
+            _control_direction_inertial.x = -_wall_direction
             velocity = Vector2(-_wall_direction * WALL_JUMP_FORCE_X, -WALL_JUMP_FORCE_Y)
             return
 
@@ -158,7 +159,7 @@ func _process_movement(_delta: float) -> void:
 
     if _use_control_direction:
         if _control_direction.x == 0:
-            new_velocity = move_toward(new_velocity, _control_direction_latent.x * SPEED * (1. - AIR_FRICTION), _deceleration)
+            new_velocity = move_toward(new_velocity, _control_direction_inertial.x * SPEED * (1. - AIR_FRICTION), _deceleration)
         else:
             new_velocity = move_toward(new_velocity, _control_direction.x * SPEED * _control_direction_scale, ACCELERATION)
 
@@ -194,15 +195,24 @@ func trigger_jump() -> void:
 func set_control_direction(direction: Vector2) -> void:
     _control_direction.x = clamp(direction.x, -1, 1)
     _control_direction.y = clamp(direction.y, -1, 1)
+    
+    if direction.x != 0:
+        _control_direction_latent.x = direction.x
+    if direction.y != 0:
+        _control_direction_latent.y = direction.y
+        
     if is_on_floor():
-        _control_direction_latent = Vector2.ZERO
+        _control_direction_inertial = Vector2.ZERO
     else:
         if _control_direction.x != 0:
-            _control_direction_latent.x = _control_direction.x
+            _control_direction_inertial.x = _control_direction.x
         if _control_direction.y != 0:
-            _control_direction_latent.y = _control_direction.y
+            _control_direction_inertial.y = _control_direction.y
 
-
+func get_latent_control_direction() -> Vector2:
+    return _control_direction_latent
+        
+    
 func set_wall_direction(in_wall_direction: float) -> void:
     _wall_direction = in_wall_direction
 
