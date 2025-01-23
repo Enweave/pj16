@@ -59,7 +59,8 @@ func switch(in_element: Constants.Elements) -> bool:
 					Constants.Elements.Water:
 						new_combination = ElementCombinations.WATER_EARTH
 				
-	if _unlocked_combinations.find(new_combination) != -1:
+#	if _unlocked_combinations.find(new_combination) != -1:
+	if true:
 		_previous_element = in_element
 		_current_combination = new_combination
 		

@@ -49,7 +49,15 @@ func _process(_delta: float) -> void:
         
         if Input.is_action_just_released(input_actions[InputActions.Fire]):
             current_character.deactivate_current_feature()
-            
+        
+        if current_character is PlayerCharacter:
+            if Input.is_action_just_pressed(input_actions[InputActions.Inventory0]):
+                current_character.switch_combination(Constants.Elements.Earth)
+            if Input.is_action_just_pressed(input_actions[InputActions.Inventory1]):
+                current_character.switch_combination(Constants.Elements.Fire)
+            if Input.is_action_just_pressed(input_actions[InputActions.Inventory2]):
+                current_character.switch_combination(Constants.Elements.Water)
+
 
 func _unhandled_input(event):
     if event is InputEventKey:
