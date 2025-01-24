@@ -31,6 +31,9 @@ func set_target(in_direction: Vector2 = Vector2.ZERO, in_position: Vector2 = Vec
 func get_target_direction() -> Vector2:
     return _target_direction
 
+func get_target_object() -> Node2D:
+    return _target_object    
+
 
 func activate() -> bool:
     _trigger_down = true
@@ -75,6 +78,7 @@ func initialize(in_wind_up_time: float, in_cooldown_time: float, in_cost: float,
 
     _cost = in_cost
     _auto_reactivate = in_auto_reactivate
+    await get_tree().create_timer(in_wind_up_time).timeout
 
     await call_deferred("add_child", _wind_up_timer)
     await call_deferred("add_child", _cooldown_timer)

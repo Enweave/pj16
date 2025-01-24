@@ -13,5 +13,5 @@ func _on_activation() -> void:
 		await FlowControllerAutoload.add_child_to_level(projectile)
 		
 		projectile.position = self.global_position
-		projectile.aim_and_fire(instigator, get_target_direction(), Vector2.ZERO, null)
+		projectile.launch(instigator, self)
 		

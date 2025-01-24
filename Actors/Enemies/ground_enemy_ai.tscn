@@ -6,8 +6,14 @@
 
 [node name="GroundEnemyAi" type="Node2D"]
 script = ExtResource("1_vmqp4")
+patrol_walk_time = 0.5
+patrol_wait_time = 0.5
 
 [node name="StateMachinePlayer" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_l8lkx")
 state_machine = ExtResource("2_8aiec")
+
+[node name="PatrolTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

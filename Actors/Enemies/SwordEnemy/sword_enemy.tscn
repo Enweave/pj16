@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0n7xa6w7l7bc"]
+[gd_scene load_steps=6 format=3 uid="uid://d0n7xa6w7l7bc"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_base.gd" id="1_g4i6a"]
 [ext_resource type="PackedScene" uid="uid://dpobjcmff7wiq" path="res://Actors/Enemies/ground_enemy_body.tscn" id="2_1w3qa"]
 [ext_resource type="PackedScene" uid="uid://b5vghmk66lfh5" path="res://Actors/Enemies/enemy_sensor_area.tscn" id="3_bons2"]
 [ext_resource type="PackedScene" uid="uid://cifl13i28odru" path="res://Actors/Enemies/ground_enemy_ai.tscn" id="4_adjgg"]
+[ext_resource type="PackedScene" uid="uid://chhxisujjyp0q" path="res://Common/Framework/Combat/ranged_weapon_base.tscn" id="5_ipfcd"]
 
 [node name="SwordEnemy" type="CharacterBody2D"]
 collision_layer = 8
@@ -17,7 +18,9 @@ max_health = 1.0
 [node name="AttackSensorArea" parent="." instance=ExtResource("3_bons2")]
 vision_radius = 50.0
 
-[node name="GroundEnemyAi" parent="." node_paths=PackedStringArray("vision_area", "attack_area") instance=ExtResource("4_adjgg")]
+[node name="GroundEnemyAi" parent="." node_paths=PackedStringArray("vision_area", "attack_area", "current_weapon") instance=ExtResource("4_adjgg")]
 vision_area = NodePath("../VisionArea")
 attack_area = NodePath("../AttackSensorArea")
-patrol_range = 100.0
+current_weapon = NodePath("../RangedWeaponBase")
+
+[node name="RangedWeaponBase" parent="." instance=ExtResource("5_ipfcd")]
