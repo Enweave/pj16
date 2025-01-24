@@ -20,3 +20,4 @@ vision_radius = 50.0
 [node name="GroundEnemyAi" parent="." node_paths=PackedStringArray("vision_area", "attack_area") instance=ExtResource("4_adjgg")]
 vision_area = NodePath("../VisionArea")
 attack_area = NodePath("../AttackSensorArea")
+patrol_range = 100.0
