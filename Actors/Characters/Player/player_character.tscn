@@ -10,13 +10,15 @@
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("current_feature")]
 script = ExtResource("1_dacai")
 current_feature = NodePath("RangedWeaponBase")
+JUMP_FORCE = 375.0
 WALL_JUMP_ENABLED = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_o13gm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.16, 0.16)
+position = Vector2(-0.12, 4.76837e-07)
+scale = Vector2(0.158125, 0.234375)
 texture = ExtResource("2_bkgel")
 
 [node name="Camera2D" type="Camera2D" parent="."]
