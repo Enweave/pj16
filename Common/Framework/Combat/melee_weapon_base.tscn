@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm6pd75b2637i"]
+
+[ext_resource type="Script" path="res://Common/Framework/Combat/melee_weapon_base.gd" id="1_gqbbq"]
+
+[node name="MeleeWeaponBase" type="Node2D" node_paths=PackedStringArray("hitbox", "animation_player")]
+script = ExtResource("1_gqbbq")
+hitbox = NodePath("Area2D")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Label" type="Label" parent="Area2D"]
+offset_left = 27.0
+offset_top = -5.0
+offset_right = 40.0
+offset_bottom = 20.0
+rotation = 1.5708
+text = "A"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -15.0
+offset_top = -44.0
+offset_right = 15.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1

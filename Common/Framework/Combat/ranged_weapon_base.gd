@@ -13,11 +13,5 @@ func _on_activation() -> void:
 		await FlowControllerAutoload.add_child_to_level(projectile)
 		
 		projectile.position = self.global_position
-		var new_control_direction: Vector2 = Vector2.RIGHT
-		if instigator != null:
-			if instigator is CharacterBase:
-				var character: CharacterBase = instigator as CharacterBase
-				new_control_direction.x = character.get_latent_control_direction().x
-				new_control_direction.y = character.get_latent_control_direction().y
-		projectile.aim_and_fire(instigator, new_control_direction, Vector2.ZERO, null)
+		projectile.aim_and_fire(instigator, get_target_direction(), Vector2.ZERO, null)
 		

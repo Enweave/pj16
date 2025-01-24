@@ -14,9 +14,22 @@ signal Windup
 signal Activation
 signal CooldownPassed
 
+var _target_direction: Vector2 = Vector2.ZERO
+var _target_position: Vector2  = Vector2.ZERO
+var _target_object: Node2D     = null
+
 
 func _ready():
     pass
+
+
+func set_target(in_direction: Vector2 = Vector2.ZERO, in_position: Vector2 = Vector2.ZERO, in_object: Node2D = null) -> void:
+    _target_direction = in_direction
+    _target_position = in_position
+    _target_object = in_object
+
+func get_target_direction() -> Vector2:
+    return _target_direction
 
 
 func activate() -> bool:

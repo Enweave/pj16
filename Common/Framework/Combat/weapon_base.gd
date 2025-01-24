@@ -9,7 +9,7 @@ class_name WeaponBase
 @export var cooldown_time: float = 0.3
 @export var full_auto: bool = false
 
-var instigator: Node2D = null
+var instigator: CharacterBase = null
 
 func _ready():
 	initialize(windup_time, cooldown_time, 0, full_auto)

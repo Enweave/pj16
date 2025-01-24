@@ -9,6 +9,7 @@ var ability_inventory: AbilityInventory = null
 
 func activate_current_feature() -> bool:
     if current_feature != null:
+        current_feature.set_target(get_latent_control_direction())
         return current_feature.activate()
     return false
 
