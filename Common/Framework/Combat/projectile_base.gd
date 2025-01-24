@@ -37,6 +37,8 @@ func aim_and_fire(in_instigator: Node2D = null, in_direction: Vector2 = Vector2.
     _lifetime_timer.autostart = true
     await (call_deferred('add_child', _lifetime_timer))
     _alive = true
+    if movement_mode == MovementMode.BALLISTIC or movement_mode == MovementMode.LINEAR:
+        _velocity = _control_direction * speed
 
 
 func _update_orientation(in_direction: Vector2 = Vector2.ZERO) -> void:
@@ -45,7 +47,6 @@ func _update_orientation(in_direction: Vector2 = Vector2.ZERO) -> void:
 
 func _process(delta: float) -> void:
     if _alive:
-        _velocity = _control_direction * speed
         match movement_mode:
             MovementMode.LINEAR:
                 position += _velocity * delta
