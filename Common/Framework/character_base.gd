@@ -5,21 +5,26 @@ var _gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") 
 
 @export_group("Movement")
 @export var SPEED: float = 200
+
 @export_range(0., 1.) var AIR_CONTROL: float = 1
+
 @export_range(0., 1.) var AIR_FRICTION: float = 0.9
 @export var ACCELERATION: float = 30
-@export_range(0., 1.)var GRAVITY_SCALE: float = 1
-@export_range(0., Constants.TERMINAL_VELOCITY)var TERMINAL_VELOCITY_HORIZONTAL: float = 500
+
+@export_range(0., 1.) var GRAVITY_SCALE: float = 1
+
+@export_range(0., Constants.TERMINAL_VELOCITY) var TERMINAL_VELOCITY_HORIZONTAL: float = 500
+
 @export_range(0., Constants.TERMINAL_VELOCITY) var TERMINAL_VELOCITY_VERTICAL: float = 400
 
 var _use_control_direction: bool = true
 
-@onready var _deceleration: float      = SPEED/8
+@onready var _deceleration: float = SPEED/8
 
-var _control_direction: Vector2          = Vector2.ZERO
+var _control_direction: Vector2 = Vector2.ZERO
 var _control_direction_inertial: Vector2 = Vector2.ZERO
-var _control_direction_latent: Vector2   = Vector2.RIGHT
-var _control_direction_scale: float    = 1
+var _control_direction_latent: Vector2 = Vector2.RIGHT
+var _control_direction_scale: float = 1
 
 @onready var _gravity_scale: float = GRAVITY_SCALE
 
@@ -35,14 +40,14 @@ var _control_direction_scale: float    = 1
 
 @onready var _jump_num_max: int = JUMP_NUM_MAX
 
-var _jump_triggered: bool       = false
-var _coyote_active: bool        = false
-var _wall_coyote_active: bool   = false
+var _jump_triggered: bool = false
+var _coyote_active: bool = false
+var _wall_coyote_active: bool = false
 
 @onready var _jumps_left: int = JUMP_NUM_MAX
 @onready var _wall_jump_enabled: bool = WALL_JUMP_ENABLED
 
-var _wall_direction: float            = 0
+var _wall_direction: float = 0
 
 @export_group("Misc")
 @export var PUSH_RIGID_BODIES: bool = false
@@ -83,8 +88,10 @@ func _ready():
 func activate_current_feature() -> bool:
     return false
 
+
 func deactivate_current_feature() -> void:
-    pass    
+    pass
+
 
 func _apply_jump_force() -> void:
     if WALL_JUMP_ENABLED:
@@ -183,10 +190,12 @@ func _physics_process(delta):
     if PUSH_RIGID_BODIES:
         _push_rigid_bodies(delta)
 
-func _set_latent_control_direction(in_direction: Vector2) -> void:
+
+func set_latent_control_direction(in_direction: Vector2) -> void:
     if in_direction.x != 0:
         _control_direction_latent.x = in_direction.x
     _control_direction_latent.y = in_direction.y
+
 
 func trigger_jump() -> void:
     var result: bool = _try_perform_jump()
@@ -194,14 +203,14 @@ func trigger_jump() -> void:
         if !_jump_triggered:
             _jump_triggered = true
             _jump_buffer_timer.start()
-            
-            
+
+
 func set_control_direction(in_direction: Vector2) -> void:
     _control_direction.x = clamp(in_direction.x, -1, 1)
     _control_direction.y = clamp(in_direction.y, -1, 1)
 
-    _set_latent_control_direction(_control_direction)
-     
+    set_latent_control_direction(_control_direction)
+
     if is_on_floor():
         _control_direction_inertial = Vector2.ZERO
     else:
@@ -210,12 +219,11 @@ func set_control_direction(in_direction: Vector2) -> void:
         if _control_direction.y != 0:
             _control_direction_inertial.y = _control_direction.y
 
-            
-        
+
 func get_latent_control_direction() -> Vector2:
     return _control_direction_latent
-        
-    
+
+
 func set_wall_direction(in_wall_direction: float) -> void:
     _wall_direction = in_wall_direction
 

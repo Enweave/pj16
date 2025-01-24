@@ -25,25 +25,25 @@ const BEHAVIOURS: Dictionary = {
     BehaviourKeys.Chase: "Chase",
     BehaviourKeys.Attack: "Attack"
 }
-var controlled_character: CharacterBase = null
+var controlled_character: CharacterBase
 
 
 func _ready() -> void:
     if owner != null and owner is CharacterBase:
         controlled_character = owner
 
-    if vision_area != null:
-        vision_area.body_entered.connect(_on_vision_entered)
-        vision_area.body_exited.connect(_on_vision_exited)
-
-    if attack_area != null:
-        attack_area.body_entered.connect(_on_attack_sensor_entered)
-        attack_area.body_exited.connect(_on_attack_sensor_exited)
-
-    %StateMachinePlayer.connect("transited", _on_StateMachinePlayer_transited)
-
-    _patrol_timer.wait_time = patrol_walk_time
-    _patrol_timer.timeout.connect(_on_patrol_timer_timeout)
+        if vision_area != null:
+            vision_area.body_entered.connect(_on_vision_entered)
+            vision_area.body_exited.connect(_on_vision_exited)
+    
+        if attack_area != null:
+            attack_area.body_entered.connect(_on_attack_sensor_entered)
+            attack_area.body_exited.connect(_on_attack_sensor_exited)
+    
+        %StateMachinePlayer.connect("transited", _on_StateMachinePlayer_transited)
+    
+        _patrol_timer.wait_time = patrol_walk_time
+        _patrol_timer.timeout.connect(_on_patrol_timer_timeout)
 
 
 func _on_patrol_timer_timeout() -> void:
@@ -54,12 +54,10 @@ func _on_patrol_timer_timeout() -> void:
     if _current_behaviour == BehaviourKeys.Patrol:
         if _patrol_wait:
             _patrol_timer.wait_time = patrol_wait_time
-            if controlled_character != null:
-                controlled_character.set_control_direction(Vector2.ZERO)
+            controlled_character.set_control_direction(Vector2.ZERO)
         else:
             _patrol_timer.wait_time = patrol_walk_time
-            if controlled_character != null:
-                controlled_character.set_control_direction(_patrol_direction)
+            controlled_character.set_control_direction(_patrol_direction)
         _patrol_timer.start()
 
 
@@ -87,17 +85,18 @@ func _on_attack_sensor_exited(body) -> void:
 
 
 func _chase(_delta)-> void:
-    if _target != null and controlled_character != null:
+    if _target != null:
         var direction: Vector2 = _target.position - controlled_character.position
         direction = direction.normalized()
         controlled_character.set_control_direction(direction)
 
 
 func _attack(_delta) -> void:
-    if _target != null and controlled_character != null:
+    if _target != null:
         var direction: Vector2 = _target.position - controlled_character.position
         direction = direction.normalized()
-        controlled_character.set_control_direction(Vector2.ZERO)
+        
+        controlled_character.set_latent_control_direction(direction)
         if current_weapon != null:
             current_weapon.set_target(direction, _target.global_position, _target)
             current_weapon.activate()
@@ -122,3 +121,4 @@ func _on_StateMachinePlayer_transited(_from, to) -> void:
         BEHAVIOURS[BehaviourKeys.Attack]:
             _patrol_timer.stop()
             _current_behaviour = BehaviourKeys.Attack
+            controlled_character.set_control_direction(Vector2.ZERO)
