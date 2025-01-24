@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpobjcmff7wiq"]
+
+[ext_resource type="Texture2D" uid="uid://pedmglffnpuk" path="res://Assets/SpriteSheets/Lilguy-Sheet-export.png" id="1_6f2lj"]
+[ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_body.gd" id="1_vrime"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pystw"]
+radius = 7.0
+height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv1ms"]
+atlas = ExtResource("1_6f2lj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj463"]
+atlas = ExtResource("1_6f2lj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21hg4"]
+atlas = ExtResource("1_6f2lj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y104q"]
+atlas = ExtResource("1_6f2lj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnsvv"]
+atlas = ExtResource("1_6f2lj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiu0q"]
+atlas = ExtResource("1_6f2lj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wwcnp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cv1ms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fj463")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21hg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y104q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnsvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yiu0q")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}]
+
+[node name="GroundEnemyBody" type="CollisionShape2D"]
+shape = SubResource("CapsuleShape2D_pystw")
+script = ExtResource("1_vrime")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_wwcnp")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.137801

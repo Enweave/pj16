@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0n7xa6w7l7bc"]
+
+[ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_base.gd" id="1_g4i6a"]
+[ext_resource type="PackedScene" uid="uid://dpobjcmff7wiq" path="res://Actors/Enemies/ground_enemy_body.tscn" id="2_1w3qa"]
+[ext_resource type="PackedScene" uid="uid://b5vghmk66lfh5" path="res://Actors/Enemies/enemy_vision_area.tscn" id="3_bons2"]
+[ext_resource type="PackedScene" uid="uid://cifl13i28odru" path="res://Actors/Enemies/ground_enemy_ai.tscn" id="4_adjgg"]
+
+[node name="SwordEnemy" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_g4i6a")
+max_health = 1.0
+
+[node name="GroundEnemyBody" parent="." instance=ExtResource("2_1w3qa")]
+
+[node name="EnemyVisionArea" parent="." instance=ExtResource("3_bons2")]
+
+[node name="GroundEnemyAi" parent="." node_paths=PackedStringArray("vision_area") instance=ExtResource("4_adjgg")]
+vision_area = NodePath("../EnemyVisionArea")

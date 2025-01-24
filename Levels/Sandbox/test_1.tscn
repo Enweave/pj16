@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://icqjxc7bco31"]
+[gd_scene load_steps=7 format=4 uid="uid://icqjxc7bco31"]
 
 [ext_resource type="Script" path="res://Common/level_base.gd" id="1_5nkw1"]
 [ext_resource type="PackedScene" uid="uid://cax7o3s63lcar" path="res://Actors/Characters/Player/player_character.tscn" id="2_1bqeb"]
 [ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/KillZ/killz.tscn" id="3_tmona"]
 [ext_resource type="PackedScene" uid="uid://cub1qdpxl8bh0" path="res://Actors/Traps/ContactDamageTrap/contact_damage_trap.tscn" id="4_wasti"]
 [ext_resource type="TileSet" uid="uid://b650gqy77pwry" path="res://Actors/Tilesets/Forest.tres" id="5_sv68s"]
+[ext_resource type="PackedScene" uid="uid://d0n7xa6w7l7bc" path="res://Actors/Enemies/SwordEnemy/sword_enemy.tscn" id="6_3of23"]
 
 [node name="Test1" type="Node"]
 script = ExtResource("1_5nkw1")
@@ -20,4 +21,8 @@ position = Vector2(104, 129)
 position = Vector2(-42, 263)
 
 [node name="ContactDamage" parent="." instance=ExtResource("4_wasti")]
-position = Vector2(196, 154)
+position = Vector2(196, 174)
+damage = 2.0
+
+[node name="SwordEnemy" parent="." instance=ExtResource("6_3of23")]
+position = Vector2(150, 73)

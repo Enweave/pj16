@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cifl13i28odru"]
+
+[ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_ai.gd" id="1_vmqp4"]
+
+[node name="GroundEnemyAi" type="Node"]
+script = ExtResource("1_vmqp4")
