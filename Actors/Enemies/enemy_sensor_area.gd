@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name EnemyVisionArea
+class_name EnemySensorArea
 
 @export var vision_radius: float = 300
 

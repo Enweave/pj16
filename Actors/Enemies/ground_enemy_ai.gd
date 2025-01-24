@@ -1,30 +1,52 @@
-﻿extends Node
+﻿extends CustomStateMachinePlayer
 class_name GroundEnemyAi
 
 @export_category("AI")
-@export var vision_area: EnemyVisionArea = null
-@export var attack_range: float = 30
-@export var patrol_range: float = 100
-@export var current_weapon: WeaponBase = null
+@export var vision_area : EnemySensorArea = null
+@export var attack_area : EnemySensorArea = null
+@export var current_weapon : WeaponBase = null
+@export var patrol_range : float = 100
 
-var _target: CharacterBase = null
-var _is_patrolling: bool   = true
-enum Behaviour {
-    Idle,
-    Patrol,
-    Chase,
-    Attack,
+var _target : CharacterBase = null
+
+enum BehaviourKeys {
+    Patrol ,
+    Chase ,
+    Attack
 }
-var controlled_character: CharacterBase = null
+
+const BEHAVIOURS : Dictionary = {
+    BehaviourKeys.Patrol : "Patrol" ,
+    BehaviourKeys.Chase : "Chase" ,
+    BehaviourKeys.Attack : "Attack"
+}
+
+var controlled_character : CharacterBase = null
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void :
+    if vision_area != null:
+        pass
 
-    pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-
+    # connect vision signals
     pass
+
+    
+func _on_vision_entered(body) -> void:
+    if body is PlayerCharacter:
+        _target = body
+        return
+
+
+func _process(_delta : float) -> void :
+    pass
+
+
+func _on_state_changed(from , to) -> void :
+    match to :
+        BEHAVIOURS[BehaviourKeys.Patrol] :
+            print('patrolling')
+        BEHAVIOURS[BehaviourKeys.Chase] :
+            print('chasing')
+        BEHAVIOURS[BehaviourKeys.Attack] :
+            print('attacking')

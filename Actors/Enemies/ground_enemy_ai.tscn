@@ -1,6 +1,143 @@
-[gd_scene load_steps=2 format=3 uid="uid://cifl13i28odru"]
+[gd_scene load_steps=22 format=3 uid="uid://cifl13i28odru"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_ai.gd" id="1_vmqp4"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="2_ynj2h"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/states/State.gd" id="3_4kjw7"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="4_5agyx"]
+[ext_resource type="Script" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="5_xv10v"]
+
+[sub_resource type="Resource" id="Resource_5t2a0"]
+script = ExtResource("3_4kjw7")
+name = "Attack"
+metadata/graph_offset = Vector2(886, 522)
+
+[sub_resource type="Resource" id="Resource_f1lex"]
+script = ExtResource("3_4kjw7")
+name = "Chase"
+metadata/graph_offset = Vector2(1066, 242)
+
+[sub_resource type="Resource" id="Resource_gkp0b"]
+script = ExtResource("3_4kjw7")
+name = "Entry"
+metadata/graph_offset = Vector2(406, 242)
+
+[sub_resource type="Resource" id="Resource_8p6lt"]
+script = ExtResource("3_4kjw7")
+name = "Patrol"
+metadata/graph_offset = Vector2(566, 242)
+
+[sub_resource type="Resource" id="Resource_4efhs"]
+script = ExtResource("5_xv10v")
+value = false
+comparation = 0
+name = "PlayerVisible"
+
+[sub_resource type="Resource" id="Resource_f8xxb"]
+script = ExtResource("4_5agyx")
+from = "Attack"
+to = "Patrol"
+conditions = {
+"PlayerVisible": SubResource("Resource_4efhs")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_66l2h"]
+script = ExtResource("5_xv10v")
+value = false
+comparation = 0
+name = "PlayerInRange"
+
+[sub_resource type="Resource" id="Resource_c3n2m"]
+script = ExtResource("4_5agyx")
+from = "Attack"
+to = "Chase"
+conditions = {
+"PlayerInRange": SubResource("Resource_66l2h")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_m1d5g"]
+script = ExtResource("5_xv10v")
+value = true
+comparation = 0
+name = "PlayerInRange"
+
+[sub_resource type="Resource" id="Resource_o7reo"]
+script = ExtResource("4_5agyx")
+from = "Chase"
+to = "Attack"
+conditions = {
+"PlayerInRange": SubResource("Resource_m1d5g")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_aqmy5"]
+script = ExtResource("5_xv10v")
+value = false
+comparation = 0
+name = "PlayerVisible"
+
+[sub_resource type="Resource" id="Resource_dn8k3"]
+script = ExtResource("4_5agyx")
+from = "Chase"
+to = "Patrol"
+conditions = {
+"PlayerVisible": SubResource("Resource_aqmy5")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_qpvi3"]
+script = ExtResource("4_5agyx")
+from = "Entry"
+to = "Patrol"
+conditions = {}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_si4tx"]
+script = ExtResource("5_xv10v")
+value = true
+comparation = 0
+name = "PlayerVisible"
+
+[sub_resource type="Resource" id="Resource_lvowu"]
+script = ExtResource("4_5agyx")
+from = "Patrol"
+to = "Chase"
+conditions = {
+"PlayerVisible": SubResource("Resource_si4tx")
+}
+priority = 0
+
+[sub_resource type="Resource" id="Resource_gn5wg"]
+script = ExtResource("2_ynj2h")
+states = {
+"Attack": SubResource("Resource_5t2a0"),
+"Chase": SubResource("Resource_f1lex"),
+"Entry": SubResource("Resource_gkp0b"),
+"Patrol": SubResource("Resource_8p6lt")
+}
+transitions = {
+"Attack": {
+"Chase": SubResource("Resource_c3n2m"),
+"Patrol": SubResource("Resource_f8xxb")
+},
+"Chase": {
+"Attack": SubResource("Resource_o7reo"),
+"Patrol": SubResource("Resource_dn8k3")
+},
+"Entry": {
+"Patrol": SubResource("Resource_qpvi3")
+},
+"Patrol": {
+"Chase": SubResource("Resource_lvowu")
+}
+}
+name = ""
 
 [node name="GroundEnemyAi" type="Node"]
 script = ExtResource("1_vmqp4")
+patrol_range = null
+state_machine = SubResource("Resource_gn5wg")
+active = null
+autostart = null
+update_process_mode = null
