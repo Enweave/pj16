@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dpobjcmff7wiq"]
 
-[ext_resource type="Texture2D" uid="uid://pedmglffnpuk" path="res://Assets/SpriteSheets/Lilguy-Sheet-export.png" id="1_6f2lj"]
+[ext_resource type="Texture2D" uid="uid://pedmglffnpuk" path="res://Assets/SpriteSheets/lilguy/Lilguy-Sheet-export.png" id="1_6f2lj"]
 [ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_body.gd" id="1_vrime"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pystw"]

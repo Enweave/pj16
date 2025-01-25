@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pedmglffnpuk"
-path="res://.godot/imported/Lilguy-Sheet-export.png-4bd29b08cb889e8194eee3327d90c2e5.ctex"
+uid="uid://bhex1ryg15ukv"
+path="res://.godot/imported/ElementalFireIdleBody-Sheet.png-6154266f909087ce590a0325d0ee8efa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SpriteSheets/Lilguy-Sheet-export.png"
-dest_files=["res://.godot/imported/Lilguy-Sheet-export.png-4bd29b08cb889e8194eee3327d90c2e5.ctex"]
+source_file="res://Assets/SpriteSheets/Player/fire/ElementalFireIdleBody-Sheet.png"
+dest_files=["res://.godot/imported/ElementalFireIdleBody-Sheet.png-6154266f909087ce590a0325d0ee8efa.ctex"]
 
 [params]
 

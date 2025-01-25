@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6x0q3vjumtpe"
-path="res://.godot/imported/Lilguy-Sheet.png-f0ed6fbe3dc61a77aa950bbea5a6ce1d.ctex"
+uid="uid://pedmglffnpuk"
+path="res://.godot/imported/Lilguy-Sheet-export.png-fcb9f28b827c698642e635b768716eba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SpriteSheets/Lilguy-Sheet.png"
-dest_files=["res://.godot/imported/Lilguy-Sheet.png-f0ed6fbe3dc61a77aa950bbea5a6ce1d.ctex"]
+source_file="res://Assets/SpriteSheets/lilguy/Lilguy-Sheet-export.png"
+dest_files=["res://.godot/imported/Lilguy-Sheet-export.png-fcb9f28b827c698642e635b768716eba.ctex"]
 
 [params]
 

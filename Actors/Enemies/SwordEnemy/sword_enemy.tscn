@@ -14,6 +14,7 @@ max_health = 1.0
 [node name="GroundEnemyBody" parent="." instance=ExtResource("2_1w3qa")]
 
 [node name="VisionArea" parent="." instance=ExtResource("3_bons2")]
+vision_radius = 150.0
 
 [node name="AttackSensorArea" parent="." instance=ExtResource("3_bons2")]
 vision_radius = 50.0
