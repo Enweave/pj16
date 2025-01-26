@@ -1,31 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://cax7o3s63lcar"]
+[gd_scene load_steps=5 format=3 uid="uid://cax7o3s63lcar"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/player_character.gd" id="1_dacai"]
-[ext_resource type="Texture2D" uid="uid://b70tyqf4y8fqg" path="res://icon.svg" id="2_bkgel"]
 [ext_resource type="PackedScene" uid="uid://dgwglquecixj4" path="res://Actors/Characters/Player/wall_jump_sensor.tscn" id="2_bvw8n"]
-[ext_resource type="PackedScene" uid="uid://chhxisujjyp0q" path="res://Common/Framework/Combat/ranged_weapon_base.tscn" id="4_vfv1g"]
-[ext_resource type="PackedScene" uid="uid://bm6pd75b2637i" path="res://Common/Framework/Combat/melee_weapon_base.tscn" id="5_7uoo1"]
+[ext_resource type="PackedScene" uid="uid://4nr3q87a1ite" path="res://Actors/Characters/Player/player_sprite.tscn" id="4_sm5dh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o13gm"]
+radius = 6.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("current_feature")]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_dacai")
-current_feature = NodePath("MeleeWeaponBase")
 JUMP_FORCE = 325.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="DefaultCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 shape = SubResource("CapsuleShape2D_o13gm")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.12, 4.76837e-07)
-scale = Vector2(0.158125, 0.234375)
-texture = ExtResource("2_bkgel")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="WallJumpSensor" parent="." instance=ExtResource("2_bvw8n")]
 unique_name_in_owner = true
 
-[node name="RangedWeaponBase" parent="." instance=ExtResource("4_vfv1g")]
-
-[node name="MeleeWeaponBase" parent="." instance=ExtResource("5_7uoo1")]
+[node name="PlayerSprite" parent="." instance=ExtResource("4_sm5dh")]
+unique_name_in_owner = true
+position = Vector2(0, -1)
