@@ -28,6 +28,7 @@ ElementCombinations.WATER_EARTH
 
 var _current_combination: ElementCombinations = ElementCombinations.WATER
 var _current_ability: FeatureBase = null
+var _current_element: Constants.Elements = Constants.Elements.Earth
 var _previous_element: Constants.Elements = Constants.Elements.Earth
 const SINGLE_ELEMENT: bool = true
 
@@ -40,8 +41,8 @@ func set_switching_allowed(in_allowed: bool) -> void:
     _switching_allowed = in_allowed
 
     
-func get_previous_element() -> Constants.Elements:
-    return _previous_element
+func get_current_element() -> Constants.Elements:
+    return _current_element
 
 func unlock_combination(in_combination: ElementCombinations) -> void:
     if _unlocked_combinations.find(in_combination) == -1:
@@ -53,18 +54,24 @@ func _switch_ability(in_combination: ElementCombinations):
     match in_combination:
         ElementCombinations.FIRE:
             _current_ability = fire_ability
+            _current_element = Constants.Elements.Fire
         ElementCombinations.WATER:
             _current_ability = water_ability
+            _current_element = Constants.Elements.Water
         ElementCombinations.EARTH:
             _current_ability = earth_ability
+            _current_element = Constants.Elements.Earth
 
         # TODO: Implement combination abilities
         ElementCombinations.FIRE_WATER:
             _current_ability = water_ability
+            _current_element = Constants.Elements.Fire
         ElementCombinations.FIRE_EARTH:
             _current_ability = earth_ability
+            _current_element = Constants.Elements.Fire
         ElementCombinations.WATER_EARTH:
             _current_ability = earth_ability
+            _current_element = Constants.Elements.Water
     CombinationSwitched.emit()
 
 

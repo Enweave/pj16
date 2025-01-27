@@ -40,15 +40,16 @@ func _ready() -> void:
     
     if ability_inventory != null:
         ability_inventory.SwitchAllowChanged.connect(_on_switch_allow_changed)
-        ability_inventory.set_combination(AbilityInventory.ElementCombinations.WATER)
+        ability_inventory.set_combination(AbilityInventory.ElementCombinations.FIRE)
         ability_inventory.CombinationSwitched.connect(_on_switch_combination)
+        _on_switch_combination()
 
     FlowControllerAutoload.set_player_character(self)
     health_component.OnDeath.connect(_on_death)
     
     
 func _on_switch_combination():
-    health_component.element = ability_inventory.get_previous_element()
+    health_component.element = ability_inventory.get_current_element()
 
 func _on_switch_allow_changed(in_allowed: bool):
     using_ability = !in_allowed
