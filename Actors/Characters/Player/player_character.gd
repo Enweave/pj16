@@ -49,7 +49,7 @@ func _ready() -> void:
     
     
 func _on_switch_combination():
-    health_component.element = ability_inventory.get_current_element()
+    health_component.set_vulnerability_by_rps_rule(ability_inventory.get_current_element())
 
 func _on_switch_allow_changed(in_allowed: bool):
     using_ability = !in_allowed

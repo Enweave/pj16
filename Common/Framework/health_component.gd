@@ -1,47 +1,51 @@
-﻿extends RefCounted
+﻿extends Node
 
 class_name HealthComponent
+
+@export_group("Health")
+@export var max_health: float = 10.
+@export var vulnerabilities: Array[Constants.Elements] = []
 
 const FIELD_NAME: String = "health_component"
 signal OnDamage(amount: float)
 signal OnHeal(amount: float)
 signal OnDeath
-var _max_health: float    = 10.
 var current_health: float
 var is_invulnerable: bool = false
 var is_dead: bool         = false
-var element: Constants.Elements = Constants.Elements.None
 
-func _init(in_max_health: float, in_element: Constants.Elements = Constants.Elements.None) -> void:
-    _max_health = in_max_health
-    current_health = _max_health
-    element = in_element
+
+func _ready() -> void:
+    current_health = max_health
+    
+func _init() -> void:
+    current_health = max_health
+
+func set_vulnerability_by_rps_rule(in_element: Constants.Elements) -> void:
+    match in_element:
+        Constants.Elements.Fire:
+            vulnerabilities = [Constants.Elements.Water]
+        Constants.Elements.Water:
+            vulnerabilities = [Constants.Elements.Earth]
+        Constants.Elements.Earth:
+            vulnerabilities = [Constants.Elements.Fire]
+        Constants.Elements.None:
+            vulnerabilities = []
 
 
 func _element_can_damage(in_element: Constants.Elements = Constants.Elements.None) -> bool:
-    # If the element is 0, it means that the element can damage anything
-    # otherwise - rock paper scissors logic:
-    # Fire -> Earth -> Water -> Fire
-    
     if in_element == Constants.Elements.None:
         return true
+
+    if vulnerabilities.size() > 0:
+        return vulnerabilities.find(in_element) != -1
         
-    match in_element:
-        Constants.Elements.Fire:
-            return element == Constants.Elements.Earth
-        Constants.Elements.Water:
-            return element == Constants.Elements.Fire
-        Constants.Elements.Earth:
-            return element == Constants.Elements.Water
-        null:
-            return false 
-    
-    return true
+    return false
 
 
 func update_max_health(value: float) -> void:
-    _max_health = value
-    current_health = min(current_health, _max_health)
+    max_health = value
+    current_health = min(current_health, max_health)
 
 
 func damage(amount: float, in_element: Constants.Elements = Constants.Elements.None) -> bool:
@@ -66,10 +70,10 @@ func instakill() -> void:
 
 
 func is_full() -> bool:
-    return current_health == _max_health
+    return current_health == max_health
 
 
 func heal(amount: float) -> void:
-    current_health = min(current_health + amount, _max_health)
+    current_health = min(current_health + amount, max_health)
     OnHeal.emit(amount)
 	

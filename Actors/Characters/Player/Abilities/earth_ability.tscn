@@ -7,4 +7,5 @@
 script = ExtResource("1_kv17q")
 projectile_scene = ExtResource("2_ckbv3")
 damage = 2.0
+element = 3
 cooldown_time = 0.5

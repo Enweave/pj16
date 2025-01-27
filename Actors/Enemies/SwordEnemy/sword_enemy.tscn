@@ -1,16 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0n7xa6w7l7bc"]
+[gd_scene load_steps=7 format=3 uid="uid://d0n7xa6w7l7bc"]
 
 [ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_base.gd" id="1_g4i6a"]
 [ext_resource type="PackedScene" uid="uid://dpobjcmff7wiq" path="res://Actors/Enemies/ground_enemy_body.tscn" id="2_1w3qa"]
 [ext_resource type="PackedScene" uid="uid://b5vghmk66lfh5" path="res://Actors/Enemies/enemy_sensor_area.tscn" id="3_bons2"]
 [ext_resource type="PackedScene" uid="uid://cifl13i28odru" path="res://Actors/Enemies/ground_enemy_ai.tscn" id="4_adjgg"]
 [ext_resource type="PackedScene" uid="uid://chhxisujjyp0q" path="res://Common/Framework/Combat/ranged_weapon_base.tscn" id="5_ipfcd"]
+[ext_resource type="Script" path="res://Common/Framework/health_component.gd" id="6_8crbj"]
 
-[node name="SwordEnemy" type="CharacterBody2D"]
+[node name="SwordEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 collision_layer = 8
 script = ExtResource("1_g4i6a")
-max_health = 1.0
-element = 3
+health_component = NodePath("HealthComponent")
 
 [node name="GroundEnemyBody" parent="." instance=ExtResource("2_1w3qa")]
 
@@ -26,3 +26,8 @@ attack_area = NodePath("../AttackSensorArea")
 current_weapon = NodePath("../RangedWeaponBase")
 
 [node name="RangedWeaponBase" parent="." instance=ExtResource("5_ipfcd")]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_8crbj")
+max_health = 2.0
+vulnerabilities = Array[int]([1, 3])

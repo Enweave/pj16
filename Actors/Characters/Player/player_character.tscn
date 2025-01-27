@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cax7o3s63lcar"]
+[gd_scene load_steps=10 format=3 uid="uid://cax7o3s63lcar"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/player_character.gd" id="1_dacai"]
 [ext_resource type="PackedScene" uid="uid://dgwglquecixj4" path="res://Actors/Characters/Player/wall_jump_sensor.tscn" id="2_bvw8n"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgvyh152pr2ud" path="res://Actors/Characters/Player/Abilities/water_ability.tscn" id="4_p3mr2"]
 [ext_resource type="PackedScene" uid="uid://4nr3q87a1ite" path="res://Actors/Characters/Player/player_sprite.tscn" id="4_sm5dh"]
 [ext_resource type="PackedScene" uid="uid://c8lwptut6kpw1" path="res://Actors/Characters/Player/Abilities/earth_ability.tscn" id="5_oijrf"]
+[ext_resource type="Script" path="res://Common/Framework/health_component.gd" id="7_fruwb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o13gm"]
 radius = 6.0
@@ -13,8 +14,9 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_14qkm"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 script = ExtResource("1_dacai")
+health_component = NodePath("HealthComponent")
 JUMP_FORCE = 325.0
 
 [node name="DefaultCollision" type="CollisionShape2D" parent="."]
@@ -52,3 +54,6 @@ earth_ability = NodePath("EarthAbility")
 position = Vector2(0, -9)
 
 [node name="WaterAbility" parent="AbilityInventory" instance=ExtResource("4_p3mr2")]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_fruwb")
