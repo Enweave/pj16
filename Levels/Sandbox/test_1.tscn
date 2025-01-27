@@ -20,5 +20,6 @@ position = Vector2(-145, -40)
 position = Vector2(-42, 263)
 
 [node name="ContactDamage" parent="." instance=ExtResource("4_wasti")]
-position = Vector2(-198, -149)
+position = Vector2(-100, -25)
+element = 2
 damage = 2.0

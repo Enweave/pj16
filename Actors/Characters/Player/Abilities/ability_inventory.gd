@@ -39,6 +39,9 @@ func set_switching_allowed(in_allowed: bool) -> void:
     SwitchAllowChanged.emit(in_allowed)
     _switching_allowed = in_allowed
 
+    
+func get_previous_element() -> Constants.Elements:
+    return _previous_element
 
 func unlock_combination(in_combination: ElementCombinations) -> void:
     if _unlocked_combinations.find(in_combination) == -1:
