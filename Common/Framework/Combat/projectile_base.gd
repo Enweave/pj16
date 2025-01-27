@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
                 _update_orientation(_velocity)
             MovementMode.HOMING:
                 if _weapon._target_object != null:
-                    var direction: Vector2 = _weapon.get_target_object().position - position
+                    var direction: Vector2 = _weapon.get_target_object().global_position - position
                     direction = direction.normalized()
                     position += direction * speed * delta
                     _update_orientation(direction)

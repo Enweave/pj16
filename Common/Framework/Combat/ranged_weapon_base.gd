@@ -5,6 +5,9 @@ class_name RangedWeaponBase
 @export_group("Ranged weapon")
 @export var projectile_scene: PackedScene = null
 
+func _ready() -> void:
+	super._ready()
+
 func _on_activation() -> void:
 	super._on_activation()
 	if projectile_scene != null:

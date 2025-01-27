@@ -12,6 +12,7 @@ class_name WeaponBase
 var instigator: CharacterBase = null
 
 func _ready():
+	super._ready()
 	initialize(windup_time, cooldown_time, 0, full_auto)
 	_update_status_label()
 	

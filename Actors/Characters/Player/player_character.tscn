@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cax7o3s63lcar"]
+[gd_scene load_steps=9 format=3 uid="uid://cax7o3s63lcar"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/player_character.gd" id="1_dacai"]
 [ext_resource type="PackedScene" uid="uid://dgwglquecixj4" path="res://Actors/Characters/Player/wall_jump_sensor.tscn" id="2_bvw8n"]
 [ext_resource type="PackedScene" uid="uid://biy5nchgtsjbj" path="res://Actors/Characters/Player/Abilities/ability_inventory.tscn" id="4_1gl6b"]
 [ext_resource type="PackedScene" uid="uid://dgvyh152pr2ud" path="res://Actors/Characters/Player/Abilities/water_ability.tscn" id="4_p3mr2"]
 [ext_resource type="PackedScene" uid="uid://4nr3q87a1ite" path="res://Actors/Characters/Player/player_sprite.tscn" id="4_sm5dh"]
+[ext_resource type="PackedScene" uid="uid://c8lwptut6kpw1" path="res://Actors/Characters/Player/Abilities/earth_ability.tscn" id="5_oijrf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o13gm"]
 radius = 6.0
@@ -46,6 +47,9 @@ position = Vector2(0, -1)
 unique_name_in_owner = true
 fire_ability = NodePath("WaterAbility")
 water_ability = NodePath("WaterAbility")
-earth_ability = NodePath("WaterAbility")
+earth_ability = NodePath("EarthAbility")
+
+[node name="EarthAbility" parent="AbilityInventory" instance=ExtResource("5_oijrf")]
+position = Vector2(0, -9)
 
 [node name="WaterAbility" parent="AbilityInventory" instance=ExtResource("4_p3mr2")]

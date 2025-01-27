@@ -51,7 +51,11 @@ const COMBINATION_BODY_HEAD_MAP: Dictionary = {
 func _ready() -> void:
     if owner != null and owner is PlayerCharacter:
         player_character = owner
+        
+    body_sprite.animation_finished.connect(_on_body_animation_finished)
 
+func _on_body_animation_finished() -> void:
+    pass
 
 func _update_body_sprite() -> void:
     if _current_action == AnimationStateKeys.ACTION:

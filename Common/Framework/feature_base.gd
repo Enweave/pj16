@@ -27,7 +27,6 @@ var ability_inventory: AbilityInventory = null
 
 func _ready():
 	var parent: Node = get_parent()
-	print("FeatureBase: _ready", owner, parent)
 	
 	if parent != null and parent is AbilityInventory:
 		ability_inventory = parent
@@ -40,6 +39,9 @@ func set_target(in_direction: Vector2 = Vector2.ZERO, in_position: Vector2 = Vec
 
 func get_target_direction() -> Vector2:
 	return _target_direction
+
+func set_target_object(in_object: Node2D) -> void:
+	_target_object = in_object	
 
 func get_target_object() -> Node2D:
 	return _target_object
@@ -135,7 +137,6 @@ func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: flo
 
 
 func _activate() -> void:
-	print("FeatureBase: _activate")
 	if ability_inventory != null:
 		ability_inventory.set_switching_allowed(false)
 		

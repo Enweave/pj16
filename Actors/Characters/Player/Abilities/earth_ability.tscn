@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8lwptut6kpw1"]
+
+[ext_resource type="Script" path="res://Actors/Characters/Player/Abilities/earth_ability.gd" id="1_kv17q"]
+[ext_resource type="PackedScene" uid="uid://bdhvalfa3c01j" path="res://Actors/Characters/Player/Abilities/earth_projectile.tscn" id="2_ckbv3"]
+
+[node name="EarthAbility" type="Node2D"]
+script = ExtResource("1_kv17q")
+projectile_scene = ExtResource("2_ckbv3")
+damage = 2.0
+element = 3
+cooldown_time = 0.5
