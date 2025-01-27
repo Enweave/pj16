@@ -1,24 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bodu36whe25b2"]
+[gd_scene load_steps=2 format=3 uid="uid://bodu36whe25b2"]
 
 [ext_resource type="Script" path="res://Common/Framework/Combat/projectile_base.gd" id="1_ys4e8"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hgttu"]
 
 [node name="ProjectileBase" type="Node2D"]
 script = ExtResource("1_ys4e8")
 movement_mode = 1
 lifetime = 1.0
 speed = 300.0
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_hgttu")
-
-[node name="Label" type="Label" parent="."]
-offset_left = 17.0
-offset_top = -5.0
-offset_right = 30.0
-offset_bottom = 20.0
-rotation = 1.5708
-text = "A"

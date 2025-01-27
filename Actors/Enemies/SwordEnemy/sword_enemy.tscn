@@ -10,6 +10,7 @@
 collision_layer = 8
 script = ExtResource("1_g4i6a")
 max_health = 1.0
+element = 3
 
 [node name="GroundEnemyBody" parent="." instance=ExtResource("2_1w3qa")]
 

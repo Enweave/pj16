@@ -12,9 +12,11 @@ enum MovementMode {
 @export var orient_to_motion: bool = true
 @export var lifetime: float = 0.5
 @export var speed: float = 900
+@export var pierce: bool = false
 
 var _control_direction: Vector2 = Vector2.ZERO
 var damage: float               = 1
+var element: Constants.Elements = Constants.Elements.None
 var _lifetime_timer: Timer
 var _alive: bool             = false
 var _gravity: float          = ProjectSettings.get_setting("physics/2d/default_gravity") as float
@@ -25,6 +27,7 @@ var _velocity: Vector2        = Vector2.ZERO
 func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
     _weapon = in_weapon
     _control_direction = in_weapon.get_target_direction()
+    element = in_weapon.element
     _instigator = in_instigator
     _lifetime_timer = Timer.new()
     _lifetime_timer.wait_time = lifetime
@@ -59,6 +62,11 @@ func _process(delta: float) -> void:
                     _update_orientation(direction)
 
 
-func _on_lifetime_timer_timeout() -> void:
+func kill_projectile() -> void:
+    if !_alive:
+        return
     _alive = false
-    call_deferred("queue_free")
+    call_deferred("queue_free")  
+            
+func _on_lifetime_timer_timeout() -> void:
+    kill_projectile()
