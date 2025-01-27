@@ -249,3 +249,6 @@ func set_jump_num_max(in_jump_num_max: int) -> void:
 
 func set_wall_jump_enabled(in_wall_jump_enabled: bool) -> void:
     _wall_jump_enabled = in_wall_jump_enabled
+
+func _process(_delta: float) -> void:
+    pass

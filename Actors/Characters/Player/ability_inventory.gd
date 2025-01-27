@@ -15,9 +15,18 @@ signal CombinationUnlocked
 signal CombinationSwitched
 
 var _switching_allowed: bool = true
-var _unlocked_combinations: Array = [ElementCombinations.EARTH]
-var _current_combination: ElementCombinations = ElementCombinations.EARTH
+var _unlocked_combinations: Array = [
+	ElementCombinations.EARTH, 
+	ElementCombinations.FIRE, 
+	ElementCombinations.WATER,
+	ElementCombinations.FIRE_WATER,
+	ElementCombinations.FIRE_EARTH,
+	ElementCombinations.WATER_EARTH
+]
+var _current_combination: ElementCombinations = ElementCombinations.WATER
 var _previous_element: Constants.Elements = Constants.Elements.Earth
+
+const SINGLE_ELEMENT: bool = true
 
 func unlock_combination(in_combination: ElementCombinations) -> void:
 	if _unlocked_combinations.find(in_combination) == -1:
@@ -27,6 +36,18 @@ func unlock_combination(in_combination: ElementCombinations) -> void:
 func switch(in_element: Constants.Elements) -> bool:
 	if not _switching_allowed:
 		return false
+	
+	if SINGLE_ELEMENT:
+		_previous_element = in_element
+		match in_element:
+			Constants.Elements.Fire:
+				_current_combination = ElementCombinations.FIRE
+			Constants.Elements.Water:
+				_current_combination = ElementCombinations.WATER
+			Constants.Elements.Earth:
+				_current_combination = ElementCombinations.EARTH
+		CombinationSwitched.emit()
+		return true
 	var new_combination: ElementCombinations = _current_combination
 	
 	if _previous_element == in_element:
@@ -59,8 +80,7 @@ func switch(in_element: Constants.Elements) -> bool:
 					Constants.Elements.Water:
 						new_combination = ElementCombinations.WATER_EARTH
 				
-#	if _unlocked_combinations.find(new_combination) != -1:
-	if true:
+	if _unlocked_combinations.find(new_combination) != -1:
 		_previous_element = in_element
 		_current_combination = new_combination
 		
