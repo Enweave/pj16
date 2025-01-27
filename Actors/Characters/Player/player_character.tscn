@@ -34,7 +34,6 @@ target_position = Vector2(0, -17)
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
 
 [node name="WallJumpSensor" parent="." instance=ExtResource("2_bvw8n")]
 unique_name_in_owner = true
