@@ -3,8 +3,6 @@ extends CharacterWithHealth
 class_name PlayerCharacter
 
 @onready var wall_jump_sensor: WallJumpSensor = %WallJumpSensor
-@export var current_ability: FeatureBase = null
-
 
 @onready var default_collision: CollisionShape2D = %DefaultCollision
 @onready var blob_collision: CollisionShape2D = %BlobCollision
@@ -19,32 +17,43 @@ func toggle_blob(in_toggle: bool) -> void:
     default_collision.disabled = in_toggle
 
 
-var ability_inventory: AbilityInventory = null
+@onready var ability_inventory: AbilityInventory = %AbilityInventory
 var using_ability: bool = false
 
 func activate_current_feature() -> bool:
-    if current_ability != null:
+    if ability_inventory != null:
+        var current_ability: FeatureBase = ability_inventory.get_current_ability()
+        if current_ability == null:
+            return false
         current_ability.set_target(get_latent_control_direction())
         return current_ability.activate()
     return false
 
 func deactivate_current_feature() -> void:
+    var current_ability: FeatureBase = ability_inventory.get_current_ability()
     if current_ability != null:
         current_ability.deactivate()    
 
 func _ready() -> void:
     super._ready()
     toggle_blob(false)
-    ability_inventory = AbilityInventory.new()
-    await call_deferred("add_child", ability_inventory)
     
+    if ability_inventory != null:
+        ability_inventory.SwitchAllowChanged.connect(_on_switch_allow_changed)
+        ability_inventory.set_combination(AbilityInventory.ElementCombinations.WATER)
+
     FlowControllerAutoload.set_player_character(self)
     health_component.OnDeath.connect(_on_death)
     
+    
+func _on_switch_allow_changed(in_allowed: bool):
+    using_ability = !in_allowed
+    
 func switch_combination(in_element: Constants.Elements) -> void:
     if ability_inventory != null:
-        ability_inventory.switch(in_element)    
+        ability_inventory.switch(in_element)
 
+        
 func _on_death() -> void:
     FlowControllerAutoload.game_over()
     

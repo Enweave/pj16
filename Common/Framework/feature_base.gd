@@ -1,4 +1,4 @@
-extends Node2D
+﻿extends Node2D
 class_name FeatureBase
 
 var _cooldown_time: float  = 0.3
@@ -11,17 +11,26 @@ var _auto_reactivate: bool = false
 var _active: bool          = false
 var _trigger_down: bool    = false
 var _locked: bool          = false
+var _animation_string_name: String = ""
+
+
 signal Windup
 signal Activation
 signal CooldownPassed
+
 
 var _target_direction: Vector2 = Vector2.ZERO
 var _target_position: Vector2  = Vector2.ZERO
 var _target_object: Node2D     = null
 
+var ability_inventory: AbilityInventory = null
 
 func _ready():
-	pass
+	var parent: Node = get_parent()
+	print("FeatureBase: _ready", owner, parent)
+	
+	if parent != null and parent is AbilityInventory:
+		ability_inventory = parent
 
 
 func set_target(in_direction: Vector2 = Vector2.ZERO, in_position: Vector2 = Vector2.ZERO, in_object: Node2D = null) -> void:
@@ -48,6 +57,8 @@ func activate() -> bool:
 
 func lock() -> void:
 	_locked = true
+	if ability_inventory != null:
+		ability_inventory.set_switching_allowed(false)
 
 func unlock(in_emit: bool = true) -> void:
 	_locked = false
@@ -56,6 +67,8 @@ func unlock(in_emit: bool = true) -> void:
 			CooldownPassed.emit()
 		_active = false
 		_trigger_down = false
+		if ability_inventory != null:
+			ability_inventory.set_switching_allowed(true)
 
 func deactivate() -> void:
 	_trigger_down = false
@@ -66,9 +79,11 @@ func reset() -> void:
 	_locked = false
 	_wind_up_timer.stop()
 	_cooldown_timer.stop()
+	
+func get_animation_string_name() -> String:
+	return _animation_string_name	
 
-
-func initialize(in_wind_up_time: float, in_cooldown_time: float, in_cost: float, in_auto_reactivate: bool) -> void:
+func initialize(in_wind_up_time: float, in_cooldown_time: float, in_cost: float, in_auto_reactivate: bool, in_animation_string_name: String = "") -> void:
 	if _initialized:
 		return
 	_initialized = true
@@ -92,13 +107,16 @@ func initialize(in_wind_up_time: float, in_cooldown_time: float, in_cost: float,
 
 	_cost = in_cost
 	_auto_reactivate = in_auto_reactivate
+
+	_animation_string_name = in_animation_string_name	
+
 	await get_tree().create_timer(in_wind_up_time).timeout
 
 	await call_deferred("add_child", _wind_up_timer)
 	await call_deferred("add_child", _cooldown_timer)
 
 
-func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: float, in_auto_reactivate: bool) -> void:
+func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: float, in_auto_reactivate: bool, in_animation_string_name: String = "") -> void:
 	_wind_up_time = in_wind_up_time
 	if in_wind_up_time > 0:
 		_wind_up_timer.wait_time = in_wind_up_time
@@ -108,6 +126,8 @@ func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: flo
 
 	_cost = in_cost
 	_auto_reactivate = in_auto_reactivate
+	
+	_animation_string_name = in_animation_string_name	
 
 	if _initialized:
 		_wind_up_timer.wait_time = in_wind_up_time
@@ -115,6 +135,10 @@ func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: flo
 
 
 func _activate() -> void:
+	print("FeatureBase: _activate")
+	if ability_inventory != null:
+		ability_inventory.set_switching_allowed(false)
+		
 	if !_active:
 		return
 	if _wind_up_time > 0:
@@ -142,5 +166,7 @@ func _on_cooldown_timer_timeout() -> void:
 	if _auto_reactivate and _trigger_down:
 		_activate()
 	else:
+		if ability_inventory != null:
+			ability_inventory.set_switching_allowed(true)
 		_active = false
 		_trigger_down = false

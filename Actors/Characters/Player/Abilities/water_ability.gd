@@ -11,7 +11,8 @@ func _ready() -> void:
 			0.01, 
 			1.5, 
 			0, 
-			false)
+			false, 
+			"water_slide")
 	
 		self.Activation.connect(_on_water_activation)
 		self.CooldownPassed.connect(_on_water_cooldown_passed)
