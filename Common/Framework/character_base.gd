@@ -205,6 +205,9 @@ func trigger_jump() -> void:
             _jump_buffer_timer.start()
 
 
+func get_control_direction() -> Vector2:
+    return _control_direction    
+    
 func set_control_direction(in_direction: Vector2) -> void:
     _control_direction.x = clamp(in_direction.x, -1, 1)
     _control_direction.y = clamp(in_direction.y, -1, 1)

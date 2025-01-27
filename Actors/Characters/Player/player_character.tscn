@@ -16,6 +16,7 @@ unique_name_in_owner = true
 shape = SubResource("CapsuleShape2D_o13gm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
 
 [node name="WallJumpSensor" parent="." instance=ExtResource("2_bvw8n")]
 unique_name_in_owner = true

@@ -3,19 +3,20 @@ extends CharacterWithHealth
 class_name PlayerCharacter
 
 @onready var wall_jump_sensor: WallJumpSensor = %WallJumpSensor
-@export var current_feature: FeatureBase = null
+@export var current_ability: FeatureBase = null
 
 var ability_inventory: AbilityInventory = null
+var using_ability: bool = false
 
 func activate_current_feature() -> bool:
-    if current_feature != null:
-        current_feature.set_target(get_latent_control_direction())
-        return current_feature.activate()
+    if current_ability != null:
+        current_ability.set_target(get_latent_control_direction())
+        return current_ability.activate()
     return false
 
 func deactivate_current_feature() -> void:
-    if current_feature != null:
-        current_feature.deactivate()    
+    if current_ability != null:
+        current_ability.deactivate()    
 
 func _ready() -> void:
     super._ready()

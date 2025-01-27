@@ -24,6 +24,14 @@
 [ext_resource type="Texture2D" uid="uid://k0vo53npuaxs" path="res://Assets/SpriteSheets/Player/water/ElementalWaterJumpHead-Sheet.png" id="21_q0fo2"]
 [ext_resource type="Texture2D" uid="uid://btqsrepme3ow4" path="res://Assets/SpriteSheets/Player/water/ElementalWaterRunHead-Sheet.png" id="22_5ohrh"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwm8r"]
+atlas = ExtResource("3_bm5l0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evfwk"]
+atlas = ExtResource("3_bm5l0")
+region = Rect2(32, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ygpi"]
 atlas = ExtResource("1_31ia2")
 region = Rect2(0, 0, 32, 32)
@@ -51,14 +59,6 @@ region = Rect2(32, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_b4mka"]
 atlas = ExtResource("2_rkc0m")
 region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jwm8r"]
-atlas = ExtResource("3_bm5l0")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_evfwk"]
-atlas = ExtResource("3_bm5l0")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oi85h"]
 atlas = ExtResource("4_w630k")
@@ -224,6 +224,17 @@ region = Rect2(160, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jwm8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evfwk")
+}],
+"loop": false,
+"name": &"earth_action",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5ygpi")
 }, {
 "duration": 1.0,
@@ -251,18 +262,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"earth_jump",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jwm8r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_evfwk")
-}],
-"loop": false,
-"name": &"earth_throw",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -301,7 +301,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_eveku")
 }],
 "loop": true,
-"name": &"fire_attack",
+"name": &"fire_action",
 "speed": 8.0
 }, {
 "frames": [{
@@ -333,7 +333,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire_jump",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -369,7 +369,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_501pr")
 }],
 "loop": true,
-"name": &"steam",
+"name": &"fire_water_action",
 "speed": 8.0
 }, {
 "frames": [{
@@ -401,7 +401,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"water_jump",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -739,13 +739,14 @@ animations = [{
 script = ExtResource("1_nxpgo")
 
 [node name="SpriteBody" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_lkag6")
-animation = &"steam"
+animation = &"earth_jump"
 autoplay = "earth_idle"
-frame_progress = 0.271811
 
 [node name="SpriteHead" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_jkkn1")
-animation = &"water_walk"
+animation = &"earth_idle"
 autoplay = "earth_idle"
-frame_progress = 0.337704
+frame_progress = 0.692625
