@@ -18,10 +18,13 @@ class_name WeaponBase
 
 var instigator: CharacterBase = null
 
+func _update_sprite_orientation() -> void:
+	if weapon_sprite_origin != null:
+		weapon_sprite_origin.scale.x = instigator.get_latent_control_direction().x
+
 func _process(_delta: float) -> void:
 	super._process(_delta)
-	if weapon_sprite_origin != null and instigator != null:
-		weapon_sprite_origin.scale.x = instigator.get_latent_control_direction().x
+	_update_sprite_orientation()
 	
 
 func _ready():
