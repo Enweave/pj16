@@ -23,7 +23,8 @@ func _on_body_entered(body: Node) -> void:
         return
     if body != projectile._instigator:
         var health_component: HealthComponent = body[HealthComponent.FIELD_NAME]
-        health_component.damage(projectile._weapon.damage, projectile._weapon.element)
+        if projectile._weapon != null:
+            health_component.damage(projectile._weapon.damage, projectile._weapon.element)
             
         if !projectile.pierce:
             projectile.kill_projectile()

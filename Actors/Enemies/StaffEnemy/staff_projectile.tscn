@@ -68,6 +68,21 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="Animation" id="Animation_d5p6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_i3f1b"]
 resource_name = "spin"
 loop_mode = 1
@@ -84,21 +99,6 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
-[sub_resource type="Animation" id="Animation_d5p6p"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_74by4"]
 _data = {
 "RESET": SubResource("Animation_d5p6p"),
@@ -111,10 +111,11 @@ movement_mode = 1
 gravity_multiplier = 0.15
 lifetime = 2.0
 speed = 250.0
+pierce = true
 
 [node name="ProjectileArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 25
+collision_mask = 17
 script = ExtResource("2_xtnpa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -7,6 +7,7 @@ var _cost: float           = 0
 var _wind_up_timer: Timer
 var _cooldown_timer: Timer
 var _initialized: bool     = false
+var _initialization_finished: bool = false
 var _auto_reactivate: bool = false
 var _active: bool          = false
 var _trigger_down: bool    = false
@@ -48,6 +49,8 @@ func get_target_object() -> Node2D:
 
 
 func activate() -> bool:
+	if !_initialization_finished:
+		return false
 	if _locked:
 		return false
 	_trigger_down = true
@@ -116,7 +119,7 @@ func initialize(in_wind_up_time: float, in_cooldown_time: float, in_cost: float,
 
 	await call_deferred("add_child", _wind_up_timer)
 	await call_deferred("add_child", _cooldown_timer)
-
+	_initialization_finished = true
 
 func update_params(in_wind_up_time: float, in_cooldown_time: float, in_cost: float, in_auto_reactivate: bool, in_animation_string_name: String = "") -> void:
 	_wind_up_time = in_wind_up_time
