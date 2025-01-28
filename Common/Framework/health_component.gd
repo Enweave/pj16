@@ -60,7 +60,7 @@ func damage(amount: float, in_element: Constants.Elements = Constants.Elements.N
     if current_health <= 0:
         is_dead = true
         OnDeath.emit()
-    OnDamage.emit(amount)
+    OnDamage.emit(amount, in_element)
     return true
 
 func instakill() -> void:

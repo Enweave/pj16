@@ -7,10 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cefxpjw7s6v4e" path="res://Actors/Enemies/AxeEnemy/axe_weapon.tscn" id="5_lv2t2"]
 [ext_resource type="Script" path="res://Common/Framework/health_component.gd" id="6_ohd8o"]
 
-[node name="SwordEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+[node name="AxeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 collision_layer = 8
 script = ExtResource("1_pvund")
 health_component = NodePath("HealthComponent")
+SPEED = 150.0
 
 [node name="GroundEnemyBody" parent="." instance=ExtResource("2_3bibt")]
 

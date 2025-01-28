@@ -40,5 +40,5 @@ func update_elements_ui() -> void:
 		AbilityInventory.ElementCombinations.WATER_EARTH:
 			current_element_label.text = "Water/Earth"
 	
-func _update_health_display(_amount: float = 0) -> void:
+func _update_health_display(_amount: float = 0, _in_element = null) -> void:
 	health_label.text = str(player_character.health_component.current_health)

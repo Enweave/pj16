@@ -41,7 +41,6 @@ func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
     await (call_deferred('add_child', _lifetime_timer))
     _alive = true
     if movement_mode == MovementMode.BALLISTIC or movement_mode == MovementMode.LINEAR:
-        print("Projectile launched", (_control_direction * speed).length())
         _velocity = _vector_from_unit_vector_and_length(_control_direction, speed)
 
 
