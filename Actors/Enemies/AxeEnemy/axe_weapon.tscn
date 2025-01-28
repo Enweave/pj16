@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://cefxpjw7s6v4e"]
+
+[ext_resource type="Script" path="res://Common/Framework/Combat/melee_weapon_base.gd" id="1_2fftd"]
+[ext_resource type="Texture2D" uid="uid://b3kwj2pllw4hf" path="res://Assets/SpriteSheets/Weapons/Axe-SheetFliph.png" id="3_ph346"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu14k"]
+atlas = ExtResource("3_ph346")
+region = Rect2(120, 0, 63, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sag76"]
+atlas = ExtResource("3_ph346")
+region = Rect2(176, 0, 66, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88o6n"]
+atlas = ExtResource("3_ph346")
+region = Rect2(242, 0, 66, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v60j2"]
+atlas = ExtResource("3_ph346")
+region = Rect2(0, 0, 62, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3do7v"]
+atlas = ExtResource("3_ph346")
+region = Rect2(76, 0, 45, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5yvfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu14k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sag76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88o6n")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v60j2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3do7v")
+}],
+"loop": false,
+"name": &"windup",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gybrj"]
+radius = 22.0
+
+[node name="AxeWeapon" type="Node2D" node_paths=PackedStringArray("hitbox_origin", "hitbox", "weapon_sprite_origin", "weapon_sprite")]
+script = ExtResource("1_2fftd")
+hitbox_origin = NodePath("HitboxOrigin")
+hitbox = NodePath("HitboxOrigin/Area2D")
+damage = 3.0
+windup_time = 0.25
+cooldown_time = 0.7
+weapon_sprite_origin = NodePath("SpriteOrigin")
+weapon_sprite = NodePath("SpriteOrigin/AnimatedSprite2D")
+
+[node name="SpriteOrigin" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteOrigin"]
+position = Vector2(6, 0)
+sprite_frames = SubResource("SpriteFrames_5yvfr")
+autoplay = "default"
+
+[node name="HitboxOrigin" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="HitboxOrigin"]
+position = Vector2(-1, 0)
+collision_layer = 0
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxOrigin/Area2D"]
+position = Vector2(12, 0)
+shape = SubResource("CircleShape2D_gybrj")
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -15.0
+offset_top = -44.0
+offset_right = 15.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/KillZ/killz.tscn" id="3_tmona"]
 [ext_resource type="PackedScene" uid="uid://cub1qdpxl8bh0" path="res://Actors/Traps/ContactDamageTrap/contact_damage_trap.tscn" id="4_wasti"]
 [ext_resource type="TileSet" uid="uid://b650gqy77pwry" path="res://Actors/Tilesets/Forest.tres" id="5_sv68s"]
-[ext_resource type="PackedScene" uid="uid://d0n7xa6w7l7bc" path="res://Actors/Enemies/SwordEnemy/sword_enemy.tscn" id="6_vip25"]
+[ext_resource type="PackedScene" uid="uid://b2ge6g4gh4pus" path="res://Actors/Enemies/AxeEnemy/axe_enemy.tscn" id="7_8udyd"]
 
 [node name="Test1" type="Node"]
 script = ExtResource("1_5nkw1")
@@ -25,8 +25,5 @@ position = Vector2(-268, -117)
 element = 2
 damage = 2.0
 
-[node name="SwordEnemy" parent="." instance=ExtResource("6_vip25")]
-position = Vector2(320, -69)
-
-[node name="SwordEnemy2" parent="." instance=ExtResource("6_vip25")]
-position = Vector2(601, -49)
+[node name="SwordEnemy3" parent="." instance=ExtResource("7_8udyd")]
+position = Vector2(247, -31)

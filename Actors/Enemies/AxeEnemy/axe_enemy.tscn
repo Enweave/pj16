@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2ge6g4gh4pus"]
+
+[ext_resource type="Script" path="res://Actors/Enemies/ground_enemy_base.gd" id="1_pvund"]
+[ext_resource type="PackedScene" uid="uid://dpobjcmff7wiq" path="res://Actors/Enemies/ground_enemy_body.tscn" id="2_3bibt"]
+[ext_resource type="PackedScene" uid="uid://b5vghmk66lfh5" path="res://Actors/Enemies/enemy_sensor_area.tscn" id="3_u42kd"]
+[ext_resource type="PackedScene" uid="uid://cifl13i28odru" path="res://Actors/Enemies/ground_enemy_ai.tscn" id="4_ifybc"]
+[ext_resource type="PackedScene" uid="uid://cefxpjw7s6v4e" path="res://Actors/Enemies/AxeEnemy/axe_weapon.tscn" id="5_lv2t2"]
+[ext_resource type="Script" path="res://Common/Framework/health_component.gd" id="6_ohd8o"]
+
+[node name="SwordEnemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+script = ExtResource("1_pvund")
+health_component = NodePath("HealthComponent")
+
+[node name="GroundEnemyBody" parent="." instance=ExtResource("2_3bibt")]
+
+[node name="VisionArea" parent="." instance=ExtResource("3_u42kd")]
+vision_radius = 150.0
+
+[node name="AttackSensorArea" parent="." instance=ExtResource("3_u42kd")]
+vision_radius = 20.0
+
+[node name="GroundEnemyAi" parent="." node_paths=PackedStringArray("vision_area", "attack_area", "current_weapon") instance=ExtResource("4_ifybc")]
+vision_area = NodePath("../VisionArea")
+attack_area = NodePath("../AttackSensorArea")
+current_weapon = NodePath("../AxeWeapon")
+
+[node name="AxeWeapon" parent="." instance=ExtResource("5_lv2t2")]
+position = Vector2(0, -12)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_ohd8o")
+max_health = 4.0
+vulnerabilities = Array[int]([1, 3])
