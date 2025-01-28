@@ -22,6 +22,13 @@ var _instigator: Node2D      = null
 var _weapon: WeaponBase      = null
 var _velocity: Vector2        = Vector2.ZERO
 
+
+func _vector_from_unit_vector_and_length(in_vector: Vector2, in_length: float) -> Vector2:
+    var new_vector: Vector2 = Vector2.ZERO
+    new_vector.x = in_length * cos(in_vector.angle())
+    new_vector.y = in_length * sin(in_vector.angle())
+    return new_vector
+
 func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
     _weapon = in_weapon
     _control_direction = in_weapon.get_target_direction()
@@ -34,7 +41,8 @@ func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
     await (call_deferred('add_child', _lifetime_timer))
     _alive = true
     if movement_mode == MovementMode.BALLISTIC or movement_mode == MovementMode.LINEAR:
-        _velocity = _control_direction * speed
+        print("Projectile launched", (_control_direction * speed).length())
+        _velocity = _vector_from_unit_vector_and_length(_control_direction, speed)
 
 
 func _update_orientation(in_direction: Vector2 = Vector2.ZERO) -> void:
