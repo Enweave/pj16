@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://bu57f8x7qy7pt"]
+
+[ext_resource type="Script" path="res://Common/Framework/Combat/ranged_weapon_base.gd" id="1_d2yag"]
+[ext_resource type="Texture2D" uid="uid://bdhwqadbu5t0y" path="res://Assets/SpriteSheets/Weapons/Staff-SheetFlip.png" id="2_r0xi0"]
+[ext_resource type="PackedScene" uid="uid://b4yi0mr3i071m" path="res://Actors/Enemies/StaffEnemy/staff_projectile.tscn" id="2_tmuh2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1ya5"]
+atlas = ExtResource("2_r0xi0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg45h"]
+atlas = ExtResource("2_r0xi0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gysae"]
+atlas = ExtResource("2_r0xi0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cebol"]
+atlas = ExtResource("2_r0xi0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k88lh"]
+atlas = ExtResource("2_r0xi0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6aesu"]
+atlas = ExtResource("2_r0xi0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qaxko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1ya5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg45h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gysae")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cebol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k88lh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6aesu")
+}],
+"loop": false,
+"name": &"windup",
+"speed": 5.0
+}]
+
+[node name="StaffWeapon" type="Node2D" node_paths=PackedStringArray("weapon_sprite_origin", "weapon_sprite")]
+script = ExtResource("1_d2yag")
+projectile_scene = ExtResource("2_tmuh2")
+damage = 2.0
+windup_time = 0.15
+cooldown_time = 0.5
+weapon_sprite_origin = NodePath("SpriteOrigin")
+weapon_sprite = NodePath("SpriteOrigin/AnimatedSprite2D")
+
+[node name="SpriteOrigin" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteOrigin"]
+position = Vector2(-3, 2)
+sprite_frames = SubResource("SpriteFrames_qaxko")
+animation = &"windup"
+autoplay = "default"
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -15.0
+offset_top = -44.0
+offset_right = 15.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
