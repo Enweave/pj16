@@ -23,6 +23,9 @@ func _on_body_entered(body: Node) -> void:
         return
     if body != projectile._instigator:
         var health_component: HealthComponent = body[HealthComponent.FIELD_NAME]
-        health_component.damage(projectile._weapon.damage, projectile._weapon.element)
+        var damaged: bool = health_component.damage(projectile._weapon.damage, projectile._weapon.element)
+        if damaged:
+            FlowControllerAutoload.add_fx_to_level(FX_Helper.FX_TYPE.DEFAULT_IMPACT, body.global_position)
+            
         if !projectile.pierce:
             projectile.kill_projectile()
