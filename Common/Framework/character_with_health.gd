@@ -15,5 +15,4 @@ func _ready():
     
     
 func _on_damage_fx(_amount: float, _element: Constants.Elements = Constants.Elements.None) -> void:
-    print("Damage FX", _amount, _element)
     FlowControllerAutoload.add_fx_to_level(FX_Helper.FX_TYPE.DEFAULT_IMPACT, global_position)
