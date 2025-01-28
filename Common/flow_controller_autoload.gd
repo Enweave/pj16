@@ -158,4 +158,6 @@ func pause_game(pause: bool):
 
 
 func toggle_pause_game():
+	if current_game_over_widget != null:
+		return
 	pause_game(not get_tree().paused)
