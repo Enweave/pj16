@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" path="res://Common/Framework/Combat/melee_weapon_base.gd" id="1_gqbbq"]
 
-[node name="MeleeWeaponBase" type="Node2D" node_paths=PackedStringArray("hitbox", "animation_player")]
+[node name="MeleeWeaponBase" type="Node2D" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("1_gqbbq")
 hitbox = NodePath("Area2D")
-animation_player = NodePath("AnimationPlayer")
 
 [node name="Area2D" type="Area2D" parent="."]
 

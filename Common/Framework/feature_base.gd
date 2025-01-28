@@ -171,3 +171,6 @@ func _on_cooldown_timer_timeout() -> void:
 			ability_inventory.set_switching_allowed(true)
 		_active = false
 		_trigger_down = false
+
+func _process(_delta: float) -> void:
+	pass
