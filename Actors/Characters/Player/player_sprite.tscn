@@ -741,7 +741,7 @@ script = ExtResource("1_nxpgo")
 [node name="SpriteBody" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_lkag6")
-animation = &"earth_throw"
+animation = &"fire_action"
 autoplay = "earth_idle"
 
 [node name="SpriteHead" type="AnimatedSprite2D" parent="."]

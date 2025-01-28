@@ -15,8 +15,6 @@ enum MovementMode {
 @export var pierce: bool = false
 
 var _control_direction: Vector2 = Vector2.ZERO
-var damage: float               = 1
-var element: Constants.Elements = Constants.Elements.None
 var _lifetime_timer: Timer
 var _alive: bool             = false
 var _gravity: float          = ProjectSettings.get_setting("physics/2d/default_gravity") as float
@@ -27,7 +25,6 @@ var _velocity: Vector2        = Vector2.ZERO
 func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
     _weapon = in_weapon
     _control_direction = in_weapon.get_target_direction()
-    element = in_weapon.element
     _instigator = in_instigator
     _lifetime_timer = Timer.new()
     _lifetime_timer.wait_time = lifetime
