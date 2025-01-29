@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://co2o6cog4q2pu"]
 
 [ext_resource type="Script" path="res://Levels/System/main_menu_level.gd" id="1_d4rfw"]
-[ext_resource type="PackedScene" uid="uid://icqjxc7bco31" path="res://Levels/Sandbox/test_1.tscn" id="2_wwx77"]
+[ext_resource type="PackedScene" uid="uid://d0u165lvgm11o" path="res://Levels/Release/level1.tscn" id="2_bi4r3"]
 
 [node name="MainMenuLevel" type="Node"]
 script = ExtResource("1_d4rfw")
-next_level_scene = ExtResource("2_wwx77")
+next_level_scene = ExtResource("2_bi4r3")
 allow_pause_menu = false
 
 [node name="Margin" type="MarginContainer" parent="."]

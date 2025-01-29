@@ -1,27 +1,32 @@
-[gd_scene load_steps=7 format=4 uid="uid://icqjxc7bco31"]
+[gd_scene load_steps=8 format=4 uid="uid://d4fsb85n36xbq"]
 
-[ext_resource type="Script" path="res://Common/level_base.gd" id="1_5nkw1"]
-[ext_resource type="PackedScene" uid="uid://cax7o3s63lcar" path="res://Actors/Characters/Player/player_character.tscn" id="2_1bqeb"]
-[ext_resource type="PackedScene" uid="uid://mba740iq2020" path="res://Actors/Backgrounds/parallax_background.tscn" id="2_h5gt1"]
-[ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/KillZ/killz.tscn" id="3_tmona"]
-[ext_resource type="TileSet" uid="uid://b650gqy77pwry" path="res://Actors/Tilesets/Forest.tres" id="5_sv68s"]
-[ext_resource type="PackedScene" uid="uid://bwnosmnjm1j0y" path="res://Actors/Characters/Player/camera_bounds.tscn" id="10_1sxi5"]
+[ext_resource type="Script" path="res://Common/level_base.gd" id="1_kusun"]
+[ext_resource type="PackedScene" uid="uid://mba740iq2020" path="res://Actors/Backgrounds/parallax_background.tscn" id="2_o7hr4"]
+[ext_resource type="TileSet" uid="uid://b650gqy77pwry" path="res://Actors/Tilesets/Forest.tres" id="3_vqenb"]
+[ext_resource type="PackedScene" uid="uid://cax7o3s63lcar" path="res://Actors/Characters/Player/player_character.tscn" id="4_das51"]
+[ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/KillZ/killz.tscn" id="5_14cri"]
+[ext_resource type="PackedScene" uid="uid://bwnosmnjm1j0y" path="res://Actors/Characters/Player/camera_bounds.tscn" id="6_futco"]
+[ext_resource type="PackedScene" uid="uid://m8ge74jwbdy7" path="res://Actors/Triggers/level_exit.tscn" id="7_kgjvj"]
 
 [node name="Test1" type="Node"]
-script = ExtResource("1_5nkw1")
+script = ExtResource("1_kusun")
+next_level_path = "res://Levels/Release/level3.tscn"
 
-[node name="ParallaxBackground" parent="." instance=ExtResource("2_h5gt1")]
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_o7hr4")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AADo/wcAAAACAAAAAADo/wgAAAACAAEAAADp/wcAAAADAAAAAADp/wgAAAADAAEAAADq/wcAAAAEAAAAAADq/wgAAAAEAAEAAADr/wcAAAACAAAAAADr/wgAAAACAAEAAADs/wcAAAADAAAAAADs/wgAAAADAAEAAADt/wcAAAAEAAAAAADt/wgAAAAEAAEAAADu/wcAAAACAAAAAADu/wgAAAACAAEAAADv/wcAAAADAAAAAADv/wgAAAADAAEAAADw/wcAAAAEAAAAAADw/wgAAAAEAAEAAADx/wcAAAACAAAAAADx/wgAAAACAAEAAADy/wcAAAADAAAAAADy/wgAAAADAAEAAADz/wcAAAAEAAAAAADz/wgAAAAEAAEAAAD0/wcAAAACAAAAAAD0/wgAAAACAAEAAAD1/wcAAAADAAAAAAD1/wgAAAADAAEAAAD2/wcAAAAEAAAAAAD2/wgAAAAEAAEAAAD3/wcAAAACAAAAAAD3/wgAAAACAAEAAAD4/wcAAAADAAAAAAD4/wgAAAADAAEAAAD5/wcAAAAEAAAAAAD5/wgAAAAEAAEAAAD6/wcAAAACAAAAAAD6/wgAAAACAAEAAAD7/wcAAAADAAAAAAD7/wgAAAADAAEAAAD8/wcAAAAEAAAAAAD8/wgAAAAEAAEAAAD9/wcAAAACAAAAAAD9/wgAAAACAAEAAAD+/wcAAAADAAAAAAD+/wgAAAADAAEAAAD//wcAAAAEAAAAAAD//wgAAAAEAAEAAAAAAAcAAAACAAAAAAAAAAgAAAACAAEAAAABAAcAAAADAAAAAAABAAgAAAADAAEAAAACAAcAAAAEAAAAAAACAAgAAAAEAAEAAAADAAcAAAACAAAAAAADAAgAAAACAAEAAAAEAAcAAAADAAAAAAAEAAgAAAADAAEAAAAFAAcAAAAEAAAAAAAFAAgAAAAEAAEAAAAGAAcAAAACAAAAAAAGAAgAAAACAAEAAAAHAAcAAAADAAAAAAAHAAgAAAADAAEAAAAIAAcAAAAEAAAAAAAIAAgAAAAEAAEAAAAJAAcAAAACAAAAAAAJAAgAAAACAAEAAAAKAAcAAAADAAAAAAAKAAgAAAADAAEAAAALAAcAAAAEAAAAAAALAAgAAAAEAAEAAAAMAAcAAAACAAAAAAAMAAgAAAACAAEAAAANAAcAAAADAAAAAAANAAgAAAADAAEAAAAOAAcAAAAEAAAAAAAOAAgAAAAEAAEAAAAPAAcAAAACAAAAAAAPAAgAAAACAAEAAAAQAAcAAAADAAAAAAAQAAgAAAADAAEAAAARAAcAAAAEAAAAAAARAAgAAAAEAAEAAAASAAcAAAACAAAAAAASAAgAAAACAAEAAAATAAcAAAADAAAAAAATAAgAAAADAAEAAAAUAAcAAAAEAAAAAAAUAAgAAAAEAAEAAAAVAAcAAAACAAAAAAAVAAgAAAACAAEAAAAWAAcAAAADAAAAAAAWAAgAAAADAAEAAAAXAAcAAAAEAAAAAAAXAAgAAAAEAAEAAAA=")
-tile_set = ExtResource("5_sv68s")
+tile_set = ExtResource("3_vqenb")
 
-[node name="Player" parent="." instance=ExtResource("2_1bqeb")]
-position = Vector2(-145, -40)
+[node name="Player" parent="." instance=ExtResource("4_das51")]
+position = Vector2(-146, 101)
 
-[node name="Killz" parent="." instance=ExtResource("3_tmona")]
-position = Vector2(-42, 263)
+[node name="Killz" parent="." instance=ExtResource("5_14cri")]
+position = Vector2(0, 270)
 
-[node name="CameraBounds" parent="." instance=ExtResource("10_1sxi5")]
+[node name="CameraBounds" parent="." instance=ExtResource("6_futco")]
 position = Vector2(6, 10)
 width = 995
+
+[node name="LevelExit" parent="." instance=ExtResource("7_kgjvj")]
+position = Vector2(363, 89)
