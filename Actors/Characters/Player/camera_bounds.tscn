@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Actors/Characters/Player/camera_bounds.gd" id="1_cm3rn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3kam"]
-size = Vector2(965, 270)
+size = Vector2(995, 270)
 
 [node name="CameraBounds" type="Node2D"]
 script = ExtResource("1_cm3rn")

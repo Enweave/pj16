@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://mba740iq2020"]
+
+[ext_resource type="Texture2D" uid="uid://bncxxx3npv2rn" path="res://Assets/Backgrounds/BGColor.png" id="1_g18sp"]
+[ext_resource type="Texture2D" uid="uid://c0epl0vtpxxp0" path="res://Assets/Backgrounds/Tree3.png" id="2_eb1m2"]
+[ext_resource type="Texture2D" uid="uid://iut2ou40hkpr" path="res://Assets/Backgrounds/Tree2.png" id="3_11uex"]
+[ext_resource type="Texture2D" uid="uid://0vubq1ln33v1" path="res://Assets/Backgrounds/Tree1.png" id="4_qv3dm"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="Color" type="Parallax2D" parent="."]
+repeat_size = Vector2(640, 360)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="Color"]
+texture = ExtResource("1_g18sp")
+
+[node name="Trees3" type="Parallax2D" parent="."]
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(1.1, 1)
+scroll_offset = Vector2(0, 130)
+repeat_size = Vector2(640, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees3"]
+texture = ExtResource("2_eb1m2")
+
+[node name="Trees2" type="Parallax2D" parent="."]
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(1.3, 2)
+repeat_size = Vector2(640, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees2"]
+texture = ExtResource("3_11uex")
+
+[node name="Trees1" type="Parallax2D" parent="."]
+scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(1.6, 2)
+repeat_size = Vector2(640, 0)
+repeat_times = 9
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees1"]
+texture = ExtResource("4_qv3dm")
