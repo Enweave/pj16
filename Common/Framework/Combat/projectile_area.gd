@@ -16,15 +16,27 @@ func _ready() -> void:
         await call_deferred('add_child', collision_shape)
         body_entered.connect(_on_body_entered)
         
+func _kill_projectile() -> bool:
+    if !projectile.pierce:
+        projectile.kill_projectile()
+        return true
+    return false
+    
 func _on_body_entered(body: Node) -> void:
     if !projectile._alive:
         return
+    
+    if body is TileMapLayer:
+        if _kill_projectile():
+            return
+    
     if !HealthComponent.FIELD_NAME in body:
         return
+    
     if body != projectile._instigator:
         var health_component: HealthComponent = body[HealthComponent.FIELD_NAME]
         if projectile._weapon != null:
             health_component.damage(projectile._weapon.damage, projectile._weapon.element)
             
-        if !projectile.pierce:
-            projectile.kill_projectile()
+        _kill_projectile()
+        
