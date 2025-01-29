@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://cscdo4cd5hj76"]
+
+[ext_resource type="Script" path="res://Common/Framework/vfx_base.gd" id="1_jbaq5"]
+[ext_resource type="Texture2D" uid="uid://duvkl7a6vwtwi" path="res://Assets/SpriteSheets/FX/Free Smoke Fx  Pixel 07.png" id="2_2d67r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwlcu"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(0, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ki30"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(64, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smtqr"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(128, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k1u5"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(192, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q48an"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(256, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpyev"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(320, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ukl3"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(384, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jshr8"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(448, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yuqf"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(512, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6pnq"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(576, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c18mi"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(640, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rxtu"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(704, 1088, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4elpf"]
+atlas = ExtResource("2_2d67r")
+region = Rect2(768, 1088, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4wvyr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwlcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ki30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smtqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k1u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q48an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpyev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ukl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jshr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yuqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6pnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c18mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rxtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4elpf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="Switch" type="Node2D"]
+script = ExtResource("1_jbaq5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4wvyr")
+autoplay = "default"
+frame = 13
+frame_progress = 1.0

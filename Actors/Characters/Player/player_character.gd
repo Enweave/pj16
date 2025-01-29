@@ -11,6 +11,8 @@ var _is_blob: bool = false
 var _low_ceiling: bool = false
 signal LowCeilingChanged
 
+var _JUMP_FX_POSITION: Vector2 = Vector2(0, 16)
+
 func toggle_blob(in_toggle: bool) -> void:
     _is_blob = in_toggle
     blob_collision.disabled = !in_toggle
@@ -46,10 +48,12 @@ func _ready() -> void:
 
     FlowControllerAutoload.set_player_character(self)
     health_component.OnDeath.connect(_on_death)
+    JumpStarted.connect(_on_jump_started)
     
     
 func _on_switch_combination():
     health_component.set_vulnerability_by_rps_rule(ability_inventory.get_current_element())
+    FlowControllerAutoload.add_fx_to_level(FX_Helper.FX_TYPE.SWITCH_COMBINATION, global_position)
 
 func _on_switch_allow_changed(in_allowed: bool):
     using_ability = !in_allowed
@@ -80,3 +84,7 @@ func _is_colliding_wall() -> bool:
     var wall_direction: int = wall_jump_sensor.get_wall_direction()
     set_wall_direction(wall_direction)
     return wall_direction != 0
+    
+    
+func _on_jump_started() -> void:
+    FlowControllerAutoload.add_fx_to_level(FX_Helper.FX_TYPE.JUMP, _JUMP_FX_POSITION, Vector2.ONE, 0.0, self)

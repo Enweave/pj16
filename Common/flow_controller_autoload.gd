@@ -90,12 +90,15 @@ func add_child_to_level(child: Node):
 		await (get_tree().get_current_scene().call_deferred("add_child", child))
 
 	
-func add_fx_to_level(in_fx: FX_Helper.FX_TYPE, in_position: Vector2, in_scale: Vector2 = Vector2.ONE, in_rotation: float = 0.0):
+func add_fx_to_level(in_fx: FX_Helper.FX_TYPE, in_position: Vector2, in_scale: Vector2 = Vector2.ONE, in_rotation: float = 0.0, parent: Node2D = null):
 	var fx : Node = load(FX_Helper.get_fx_path(in_fx)).instantiate()
 	fx.global_position = in_position
 	fx.global_scale = in_scale
 	fx.rotation = in_rotation
-	add_child_to_level(fx)
+	if parent == null:
+		add_child_to_level(fx)
+	else:
+		parent.call_deferred("add_child", fx)
 
 
 	

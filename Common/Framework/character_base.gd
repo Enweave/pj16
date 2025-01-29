@@ -52,8 +52,10 @@ var _wall_direction: float = 0
 @export_group("Misc")
 @export var PUSH_RIGID_BODIES: bool = false
 @export var PUSH_RIGID_BODIES_FORCE: float = 2
-signal jump_started
-signal landed
+
+signal JumpStarted
+signal Landed
+
 var _jump_buffer_timer: Timer
 var _coyote_timer: Timer
 var _wall_coyote_timer: Timer
@@ -102,6 +104,7 @@ func _apply_jump_force() -> void:
 
     velocity.y = -JUMP_FORCE
     _jumps_left -= 1
+    JumpStarted.emit()
 
 
 func _try_perform_jump() -> bool:
