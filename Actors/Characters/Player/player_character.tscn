@@ -15,7 +15,7 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_14qkm"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["player"]]
 script = ExtResource("1_dacai")
 health_component = NodePath("HealthComponent")
 JUMP_FORCE = 325.0
@@ -37,6 +37,7 @@ target_position = Vector2(0, -17)
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 
 [node name="WallJumpSensor" parent="." instance=ExtResource("2_bvw8n")]
 unique_name_in_owner = true

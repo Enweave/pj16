@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://icqjxc7bco31"]
+[gd_scene load_steps=11 format=4 uid="uid://icqjxc7bco31"]
 
 [ext_resource type="Script" path="res://Common/level_base.gd" id="1_5nkw1"]
 [ext_resource type="PackedScene" uid="uid://cax7o3s63lcar" path="res://Actors/Characters/Player/player_character.tscn" id="2_1bqeb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ge6g4gh4pus" path="res://Actors/Enemies/AxeEnemy/axe_enemy.tscn" id="7_8udyd"]
 [ext_resource type="PackedScene" uid="uid://du4r6s0eckcjw" path="res://Actors/Enemies/StaffEnemy/staff_enemy.tscn" id="7_sdh0q"]
 [ext_resource type="PackedScene" uid="uid://d0n7xa6w7l7bc" path="res://Actors/Enemies/SwordEnemy/sword_enemy.tscn" id="8_2d31j"]
+[ext_resource type="PackedScene" uid="uid://bwnosmnjm1j0y" path="res://Actors/Characters/Player/camera_bounds.tscn" id="10_1sxi5"]
 
 [node name="Test1" type="Node"]
 script = ExtResource("1_5nkw1")
@@ -39,3 +40,7 @@ position = Vector2(535, -15)
 
 [node name="StaffEnemy" parent="." instance=ExtResource("7_sdh0q")]
 position = Vector2(599, -118)
+
+[node name="CameraBounds" parent="." instance=ExtResource("10_1sxi5")]
+position = Vector2(211, -89)
+width = 965
