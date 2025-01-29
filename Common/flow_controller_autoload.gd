@@ -1,5 +1,7 @@
 extends Node
 
+const FADE_DURATION: float = 0.15
+
 var current_level: LevelBase
 var input_controller: InputController
 var next_level_scene_path: String   = ""
@@ -79,7 +81,6 @@ func restart_level():
 	if current_level != null:
 		# reinstantiate current level
 		var level_path: String = current_level.scene_file_path
-		await current_level.call_deferred("queue_free")
 		_load_level(level_path)
 
 
@@ -102,7 +103,13 @@ func add_fx_to_level(in_fx: FX_Helper.FX_TYPE, in_position: Vector2, in_scale: V
 
 
 	
+
 func _load_level(level_path: String):
+	var tween: Tween = get_tree().create_tween()
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(viewport_container, 'modulate:a', 0, FADE_DURATION)
+	get_tree().paused = true
+	await tween.finished
 	if ingame_ui != null:
 		ingame_ui.toggle_visibility(false)
 	pause_game(false)
@@ -116,6 +123,11 @@ func _load_level(level_path: String):
 		await(current_level.call_deferred("queue_free"))
 	var level: Node = load(level_path).instantiate()
 	await viewport.call_deferred('add_child', level)
+	
+	# fade-in fade-out effect using tween and opacity on viewport container
+	get_tree().paused = false
+	tween = get_tree().create_tween()
+	tween.tween_property(viewport_container, 'modulate:a', 1, FADE_DURATION)
 	
 
 func load_next_level():
