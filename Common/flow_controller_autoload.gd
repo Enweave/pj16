@@ -115,7 +115,7 @@ func _load_level(level_path: String):
 	else:
 		await(current_level.call_deferred("queue_free"))
 	var level: Node = load(level_path).instantiate()
-	viewport.add_child(level)
+	await viewport.call_deferred('add_child', level)
 	
 
 func load_next_level():

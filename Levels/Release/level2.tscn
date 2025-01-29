@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://d4fsb85n36xbq"]
+[gd_scene load_steps=11 format=4 uid="uid://d4fsb85n36xbq"]
 
 [ext_resource type="Script" path="res://Common/level_base.gd" id="1_kusun"]
 [ext_resource type="PackedScene" uid="uid://mba740iq2020" path="res://Actors/Backgrounds/parallax_background.tscn" id="2_o7hr4"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cymlx1q7iwg1x" path="res://Actors/Traps/KillZ/killz.tscn" id="5_14cri"]
 [ext_resource type="PackedScene" uid="uid://bwnosmnjm1j0y" path="res://Actors/Characters/Player/camera_bounds.tscn" id="6_futco"]
 [ext_resource type="PackedScene" uid="uid://m8ge74jwbdy7" path="res://Actors/Triggers/level_exit.tscn" id="7_kgjvj"]
+[ext_resource type="PackedScene" uid="uid://b2ge6g4gh4pus" path="res://Actors/Enemies/AxeEnemy/axe_enemy.tscn" id="8_61s3v"]
+[ext_resource type="PackedScene" uid="uid://ib8gl0n14obk" path="res://Actors/Enemies/BowEnemy/bow_enemy.tscn" id="9_mvyps"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gi2nq"]
 
 [node name="Test1" type="Node"]
 script = ExtResource("1_kusun")
@@ -19,14 +23,35 @@ tile_map_data = PackedByteArray("AADo/wcAAAACAAAAAADo/wgAAAACAAEAAADp/wcAAAADAAA
 tile_set = ExtResource("3_vqenb")
 
 [node name="Player" parent="." instance=ExtResource("4_das51")]
-position = Vector2(-146, 101)
+position = Vector2(-329, 101)
 
 [node name="Killz" parent="." instance=ExtResource("5_14cri")]
 position = Vector2(0, 270)
 
 [node name="CameraBounds" parent="." instance=ExtResource("6_futco")]
 position = Vector2(6, 10)
-width = 995
+width = 780
 
 [node name="LevelExit" parent="." instance=ExtResource("7_kgjvj")]
 position = Vector2(363, 89)
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2(-386, 0)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_gi2nq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(-3.36141e-05, -769)
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_gi2nq")
+
+[node name="AxeEnemy" parent="." instance=ExtResource("8_61s3v")]
+position = Vector2(-64, 70)
+
+[node name="AxeEnemy2" parent="." instance=ExtResource("8_61s3v")]
+position = Vector2(148, 67)
+
+[node name="BowEnemy" parent="." instance=ExtResource("9_mvyps")]
+position = Vector2(264, 12)
