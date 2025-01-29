@@ -172,7 +172,14 @@ func pause_game(pause: bool):
 		get_tree().paused = false
 
 
-func toggle_pause_game():
+func toggle_pause_game() -> void:
 	if current_game_over_widget != null:
 		return
 	pause_game(not get_tree().paused)
+
+	
+func handle_pause_input():
+	# TODO: when other menus are added, this function should be updated
+	# close other menus if they are open
+	# otherwise toggle pause
+	toggle_pause_game()
