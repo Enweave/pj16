@@ -23,7 +23,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="Margin/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Game Title go here
+text = "Entato Lelementals
 
 "
 horizontal_alignment = 1
