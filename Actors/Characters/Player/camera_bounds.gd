@@ -15,7 +15,8 @@ class_name CameraBounds
 	
 func update_bounds():
 	if Engine.is_editor_hint():
-		%CameraBounds.shape['size'] = Vector2(width, height)
+		if get_node_or_null("%CameraBounds") != null:
+			%CameraBounds.shape['size'] = Vector2(width, height)
 
 
 
