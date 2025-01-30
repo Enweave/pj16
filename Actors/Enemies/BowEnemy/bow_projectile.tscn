@@ -22,9 +22,9 @@ animations = [{
 [node name="BowProjectile" type="Node2D"]
 script = ExtResource("1_qj57i")
 movement_mode = 1
-gravity_multiplier = 0.5
-lifetime = 2.0
-speed = 300.0
+gravity_multiplier = 0.559
+lifetime = 4.0
+speed = 500.0
 
 [node name="ProjectileArea" type="Area2D" parent="."]
 collision_layer = 0

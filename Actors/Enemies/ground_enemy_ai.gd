@@ -35,13 +35,13 @@ func _ready() -> void:
         if vision_area != null:
             vision_area.body_entered.connect(_on_vision_entered)
             vision_area.body_exited.connect(_on_vision_exited)
-    
+
         if attack_area != null:
             attack_area.body_entered.connect(_on_attack_sensor_entered)
             attack_area.body_exited.connect(_on_attack_sensor_exited)
-    
+
         %StateMachinePlayer.connect("transited", _on_StateMachinePlayer_transited)
-    
+
         _patrol_timer.wait_time = patrol_walk_time
         _patrol_timer.timeout.connect(_on_patrol_timer_timeout)
 
@@ -95,7 +95,8 @@ func _attack(_delta) -> void:
     if _target != null:
         var direction: Vector2 = _target.position - controlled_character.position
         direction = direction.normalized()
-        
+
+        controlled_character.set_control_direction(Vector2.ZERO)
         controlled_character.set_latent_control_direction(direction)
         if current_weapon != null:
             current_weapon.set_target(direction, _target.global_position, _target)
