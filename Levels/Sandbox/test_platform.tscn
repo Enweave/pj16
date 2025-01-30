@@ -33,7 +33,7 @@ position = Vector2(0, 270)
 [node name="CameraBounds" parent="." instance=ExtResource("6_pfomb")]
 
 [node name="PlatformTrigger" parent="." node_paths=PackedStringArray("platform") instance=ExtResource("8_tcfmh")]
-position = Vector2(-112, 120)
+position = Vector2(-112, 128)
 platform = NodePath("../Path2D/MovingPlatform")
 oneshot = false
 
