@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccxnf7khpta3s"]
+[gd_scene load_steps=3 format=3 uid="uid://ccxnf7khpta3s"]
 
 [ext_resource type="Script" path="res://UI/ingame_u_i.gd" id="1_kmwes"]
+[ext_resource type="FontFile" uid="uid://bf2ukf0ja7kmp" path="res://Assets/Fonts/rainyhearts.ttf" id="2_w1t7i"]
 
 [node name="IngameUi" type="Control"]
 layout_mode = 3
@@ -35,16 +36,18 @@ layout_mode = 2
 [node name="HPContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_vertical = 8
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/HPContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_w1t7i")
 text = "hp:"
 
 [node name="HPValue" type="Label" parent="MarginContainer/HBoxContainer2/HPContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_w1t7i")
 
 [node name="MPContatiner" type="HBoxContainer" parent="MarginContainer/HBoxContainer2"]
 visible = false

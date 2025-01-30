@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/pause_menu.gd" id="1_u4ynl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npnsw"]
-bg_color = Color(0.176419, 0.176419, 0.176419, 1)
+bg_color = Color(0.0627451, 0.0705882, 0.0901961, 1)
 
 [node name="PauseMenu" type="Control"]
 z_index = 1

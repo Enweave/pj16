@@ -1,9 +1,19 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://kk1r6jsfbwjt"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://kk1r6jsfbwjt"]
 
+[ext_resource type="FontFile" uid="uid://bf2ukf0ja7kmp" path="res://Assets/Fonts/rainyhearts.ttf" id="1_4dsiv"]
 [ext_resource type="StyleBox" uid="uid://2xwscq7m0ruv" path="res://UI/button_stylebox.tres" id="1_so5tc"]
+[ext_resource type="StyleBox" uid="uid://dtm3natum5a0g" path="res://UI/button_focus.tres" id="2_ja6es"]
+[ext_resource type="FontFile" uid="uid://6gg0wkbn7f5k" path="res://Assets/Fonts/Retro Gaming.ttf" id="3_n05qy"]
+[ext_resource type="StyleBox" uid="uid://cgedxk8r0ckfq" path="res://UI/button_hover.tres" id="3_x63vn"]
+[ext_resource type="StyleBox" uid="uid://cvmaul8e4tcnt" path="res://UI/button_pressed.tres" id="5_mtolo"]
 
 [resource]
+Button/fonts/font = ExtResource("1_4dsiv")
+Button/styles/focus = ExtResource("2_ja6es")
+Button/styles/hover = ExtResource("3_x63vn")
 Button/styles/normal = ExtResource("1_so5tc")
+Button/styles/pressed = ExtResource("5_mtolo")
+Label/fonts/font = ExtResource("3_n05qy")
 MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
