@@ -9,4 +9,5 @@ func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
 	return_timer.timeout.connect(_on_return_timer_timeout)
 	
 func _on_return_timer_timeout() -> void:
+	_weapon.set_target_object(_weapon)
 	movement_mode = MovementMode.HOMING

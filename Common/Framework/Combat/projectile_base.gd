@@ -40,8 +40,19 @@ func launch(in_instigator: Node2D, in_weapon: WeaponBase) -> void:
 	_lifetime_timer.autostart = true
 	await (call_deferred('add_child', _lifetime_timer))
 	_alive = true
+	if movement_mode == MovementMode.BALLISTIC and _weapon.get_target_object() != null:
+		var suggested_velovity: Vector2 = calculate_launch_velocity(global_position, _weapon.get_target_object().global_position, _gravity * gravity_multiplier)
+		if suggested_velovity != Vector2.ZERO:
+			print("Suggested velocity: ", suggested_velovity)
+			_velocity = suggested_velovity
+		else:
+			print("No solution found")
+			_velocity = _vector_from_unit_vector_and_length(_control_direction, speed)
+		return
 	if movement_mode == MovementMode.BALLISTIC or movement_mode == MovementMode.LINEAR:
 		_velocity = _vector_from_unit_vector_and_length(_control_direction, speed)
+		return
+
 
 
 func _update_orientation(in_direction: Vector2 = Vector2.ZERO) -> void:
@@ -75,3 +86,31 @@ func kill_projectile() -> void:
 			
 func _on_lifetime_timer_timeout() -> void:
 	kill_projectile()
+
+
+func calculate_launch_velocity(start_pos: Vector2, target_pos: Vector2, gravity: float) -> Vector2:
+	"""Calculates the initial velocity needed to launch a body from start_pos to target_pos,
+    given a gravitational acceleration.
+
+    Args:
+        start_pos: The starting position (Vector2).
+        target_pos: The target position (Vector2).
+        gravity: The gravitational acceleration (float).  Assumed to be negative downwards.
+
+    Returns:
+        A Vector2 representing the initial velocity, or Vector2.Zero if no solution exists (e.g., target is unreachable).
+    """
+	
+	var distance: Vector2 = target_pos - start_pos
+	var distance_x: float = distance.x
+	var distance_y: float = distance.y
+	
+	if distance_x == 0:
+		return Vector2.ZERO
+	
+	var time: float = sqrt(abs(2 * distance_y / gravity))
+	
+	var velocity_x: float = distance_x / time
+	var velocity_y: float = gravity * time
+	
+	return Vector2(velocity_x, -velocity_y)
