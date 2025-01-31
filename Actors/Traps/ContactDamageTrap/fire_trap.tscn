@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnpfhb8rnu4yt"]
+
+[ext_resource type="Script" path="res://Actors/Traps/ContactDamageTrap/contact_damage_trap.gd" id="1_joikh"]
+[ext_resource type="Texture2D" uid="uid://cybxjpr3fnhh8" path="res://Assets/SpriteSheets/Player/Flamethrower-Sheet.png" id="2_qoml0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87rie"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df0w3"]
+atlas = ExtResource("2_qoml0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv6wq"]
+atlas = ExtResource("2_qoml0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrfsb"]
+atlas = ExtResource("2_qoml0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lopwn"]
+atlas = ExtResource("2_qoml0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w7d3i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df0w3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv6wq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrfsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lopwn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="ContactDamageTrap" type="Node2D"]
+script = ExtResource("1_joikh")
+element = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_87rie")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+rotation = -1.5708
+scale = Vector2(1.38, 1.38)
+sprite_frames = SubResource("SpriteFrames_w7d3i")
+autoplay = "default"
+frame_progress = 0.406401
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

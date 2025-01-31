@@ -1,12 +1,93 @@
-[gd_scene load_steps=3 format=3 uid="uid://cub1qdpxl8bh0"]
+[gd_scene load_steps=12 format=3 uid="uid://cub1qdpxl8bh0"]
 
 [ext_resource type="Script" path="res://Actors/Traps/ContactDamageTrap/contact_damage_trap.gd" id="1_r81sn"]
+[ext_resource type="Texture2D" uid="uid://d2wxavm47im0" path="res://Assets/SpriteSheets/FX/Free Smoke Fx  Pixel 06.png" id="2_uim6r"]
+
+[sub_resource type="Animation" id="Animation_xfgop"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_a8isi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1o2v3"]
+_data = {
+"RESET": SubResource("Animation_a8isi"),
+"new_animation": SubResource("Animation_xfgop")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_87rie"]
 size = Vector2(32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hter4"]
+atlas = ExtResource("2_uim6r")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pd54"]
+atlas = ExtResource("2_uim6r")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1t73"]
+atlas = ExtResource("2_uim6r")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnveq"]
+atlas = ExtResource("2_uim6r")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ocgkq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hter4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pd54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1t73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnveq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
 [node name="ContactDamageTrap" type="Node2D"]
 script = ExtResource("1_r81sn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_1o2v3")
+}
+autoplay = "new_animation"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 9
@@ -14,8 +95,12 @@ collision_mask = 9
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_87rie")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0, 0, 1)
-polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -0.095)
+rotation = 6.28319
+scale = Vector2(0.705, 0.705)
+sprite_frames = SubResource("SpriteFrames_ocgkq")
+frame_progress = 0.513839
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

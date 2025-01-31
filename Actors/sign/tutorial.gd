@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var text: String
+@export var initially_shown: bool = false
 @onready var regex: RegEx = RegEx.new()
 
 
@@ -29,9 +30,12 @@ func _ready()->void:
 	regex.compile("\\(.*?\\)")
 	%Label.text = text
 	%Label.text = template_text(text)
+	if initially_shown:
+		%Label.visible = true
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is PlayerCharacter:
+		%Label.text = template_text(text)
 		%Label.visible = true
 
 
