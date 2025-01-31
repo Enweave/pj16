@@ -12,6 +12,8 @@ var _low_ceiling: bool = false
 signal LowCeilingChanged
 
 var _JUMP_FX_POSITION: Vector2 = Vector2(0, 16)
+var latent_control_direction_locked: bool = false
+
 
 func toggle_blob(in_toggle: bool) -> void:
 	_is_blob = in_toggle
@@ -33,6 +35,7 @@ func activate_current_feature() -> bool:
 
 func deactivate_current_feature() -> void:
 	var current_ability: FeatureBase = ability_inventory.get_current_ability()
+	latent_control_direction_locked = false
 	if current_ability != null:
 		current_ability.deactivate()    
 
@@ -88,6 +91,14 @@ func _is_colliding_wall() -> bool:
 	
 func _on_jump_started() -> void:
 	FlowControllerAutoload.add_fx_to_level(FX_Helper.FX_TYPE.JUMP, _JUMP_FX_POSITION, Vector2.ONE, 0.0, self)
+
+	
+func set_latent_control_direction(in_direction: Vector2) -> void:
+	if latent_control_direction_locked:
+		return
+	if in_direction.x != 0:
+		_control_direction_latent.x = in_direction.x
+	_control_direction_latent.y = in_direction.y
 
 
 func update_camera_bounds(left: int, top: int, right: int, bottom: int):

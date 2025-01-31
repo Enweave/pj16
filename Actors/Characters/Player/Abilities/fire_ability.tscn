@@ -55,7 +55,8 @@ hitbox_origin = NodePath("HitboxOrigin")
 hitbox = NodePath("HitboxOrigin/Area2D")
 damage = 2.0
 element = 1
-cooldown_time = 0.5
+windup_time = 0.0
+full_auto = true
 
 [node name="HitboxOrigin" type="Node2D" parent="."]
 
