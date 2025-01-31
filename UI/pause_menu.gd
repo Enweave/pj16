@@ -12,3 +12,6 @@ func _on_main_menu_button_pressed():
     
 func _on_retry_button_pressed():
     FlowControllerAutoload.restart_level()
+    
+func _on_settings_button_pressed():
+    FlowControllerAutoload.display_settings_menu()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj52muvd5ufkn"]
+[gd_scene load_steps=3 format=3 uid="uid://dj52muvd5ufkn"]
 
 [ext_resource type="Script" path="res://UI/Widgets/gameover_widget.gd" id="1_r6xaj"]
+[ext_resource type="FontFile" uid="uid://6gg0wkbn7f5k" path="res://Assets/Fonts/Retro Gaming.ttf" id="2_yi5og"]
 
 [node name="GameoverWidget" type="Control"]
 layout_mode = 3
@@ -34,6 +35,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_yi5og")
 theme_override_font_sizes/font_size = 24
 text = "GAME OVER!"
 horizontal_alignment = 1

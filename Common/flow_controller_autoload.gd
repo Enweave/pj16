@@ -10,13 +10,15 @@ const end_game_level_path: String   = "res://Levels/System/end_game_level.tscn"
 const game_over_widget_path: String = "res://UI/Widgets/gameover_widget.tscn"
 const pause_menu_path: String       = "res://UI/pause_menu.tscn"
 const ingame_ui_path: String        = "res://UI/ingame_ui.tscn"
+const settings_menu_path: String    = "res://UI/settings_menu.tscn"
 var current_pause_menu: PauseMenu
 var current_game_over_widget: GameoverWidget
 var viewport_container: SubViewportContainer
 var viewport: SubViewport
 var ingame_ui: IngameUI
 var pause_menu_allowed: bool        = true
-
+var settings_menu_displayed: bool   = false
+var settings_menu: SettingsMenu
 
 func _ready():
 	current_pause_menu = null
@@ -39,6 +41,10 @@ func _ready():
 	viewport.handle_input_locally = true
 	viewport.canvas_item_default_texture_filter = 0 # DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST 
 
+	settings_menu = load(settings_menu_path).instantiate()
+	settings_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	await get_tree().get_root().call_deferred("add_child", settings_menu)
+	hide_settings_menu()
 	get_tree().create_timer(0.3).timeout.connect(_on_timeout)
 
 
@@ -178,8 +184,17 @@ func toggle_pause_game() -> void:
 	pause_game(not get_tree().paused)
 
 	
+func display_settings_menu():
+	settings_menu_displayed = true
+	settings_menu.display_settings()
+	get_tree().get_root().move_child(settings_menu, -1)
+
+func hide_settings_menu():
+	settings_menu_displayed = false
+	settings_menu.hide_settings()
+	
 func handle_pause_input():
-	# TODO: when other menus are added, this function should be updated
-	# close other menus if they are open
-	# otherwise toggle pause
-	toggle_pause_game()
+	if settings_menu_displayed:
+		hide_settings_menu()
+	else:
+		toggle_pause_game()

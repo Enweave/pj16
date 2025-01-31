@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://caj3hxdkercno"]
+[gd_scene load_steps=3 format=3 uid="uid://caj3hxdkercno"]
 
 [ext_resource type="Script" path="res://Levels/System/end_game_level.gd" id="1_w8mwq"]
+[ext_resource type="FontFile" uid="uid://6gg0wkbn7f5k" path="res://Assets/Fonts/Retro Gaming.ttf" id="2_frf3k"]
 
 [node name="EndGameLevel" type="Node"]
 script = ExtResource("1_w8mwq")
@@ -21,8 +22,16 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="Margin/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_frf3k")
 theme_override_font_sizes/font_size = 24
-text = "The End!
+text = "The End!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Margin/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "
+Thanks for playing!
 
 "
 horizontal_alignment = 1

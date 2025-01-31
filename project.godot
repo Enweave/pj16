@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 FlowControllerAutoload="*res://Common/flow_controller_autoload.gd"
 Constants="*res://Common/constants.gd"
+AppConfig="*res://addons/maaacks_options_menus/base/scenes/autoloads/app_config.tscn"
 
 [display]
 
@@ -30,7 +31,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/imjp94.yafsm/plugin.cfg")
+enabled=PackedStringArray("res://addons/imjp94.yafsm/plugin.cfg", "res://addons/maaacks_options_menus/plugin.cfg")
 
 [gui]
 
@@ -91,6 +92,10 @@ input_Inventory2={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/maaacks_options_menus/base/translations/menus_translations.en.translation", "res://addons/maaacks_options_menus/base/translations/menus_translations.fr.translation")
+
 [layer_names]
 
 2d_physics/layer_1="Base"
@@ -98,6 +103,10 @@ input_Inventory2={
 2d_physics/layer_3="Grill"
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Activatable"
+
+[maaacks_options_menus]
+
+disable_plugin_dialogues=true
 
 [rendering]
 

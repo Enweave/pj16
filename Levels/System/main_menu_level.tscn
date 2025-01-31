@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://co2o6cog4q2pu"]
+[gd_scene load_steps=4 format=3 uid="uid://co2o6cog4q2pu"]
 
 [ext_resource type="Script" path="res://Levels/System/main_menu_level.gd" id="1_d4rfw"]
 [ext_resource type="PackedScene" uid="uid://d0u165lvgm11o" path="res://Levels/Release/level1.tscn" id="2_bi4r3"]
+[ext_resource type="FontFile" uid="uid://6gg0wkbn7f5k" path="res://Assets/Fonts/Retro Gaming.ttf" id="3_s7p1p"]
 
 [node name="MainMenuLevel" type="Node"]
 script = ExtResource("1_d4rfw")
@@ -22,6 +23,7 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="Margin/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s7p1p")
 theme_override_font_sizes/font_size = 24
 text = "Entato Lelementals
 
@@ -33,7 +35,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="StartGameButton" type="Button" parent="Margin/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Start game"
 
+[node name="SettingsButton" type="Button" parent="Margin/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
 [connection signal="pressed" from="Margin/VBoxContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="Margin/VBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
