@@ -7,6 +7,7 @@ func _ready():
 		b.grab_focus()
 	
 func _on_start_game_button_pressed():
+	FlowControllerAutoload.new_game()
 	FlowControllerAutoload.load_next_level()
 	
 func _on_settings_button_pressed():

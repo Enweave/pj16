@@ -13,7 +13,7 @@ signal LowCeilingChanged
 
 var _JUMP_FX_POSITION: Vector2 = Vector2(0, 16)
 var latent_control_direction_locked: bool = false
-
+var player_state: PlayerState
 
 func toggle_blob(in_toggle: bool) -> void:
 	_is_blob = in_toggle
@@ -43,9 +43,14 @@ func _ready() -> void:
 	super._ready()
 	toggle_blob(false)
 	
+	player_state = FlowControllerAutoload.player_state
+	if player_state == null:
+		player_state = PlayerState.new()
+		player_state.reset()
+
 	if ability_inventory != null:
 		ability_inventory.SwitchAllowChanged.connect(_on_switch_allow_changed)
-		ability_inventory.set_combination(AbilityInventory.ElementCombinations.FIRE)
+		ability_inventory.set_combination(player_state.get_last_combination())
 		ability_inventory.CombinationSwitched.connect(_on_switch_combination)
 		_on_switch_combination()
 
@@ -56,6 +61,7 @@ func _ready() -> void:
 	
 func _on_switch_combination():
 	health_component.set_vulnerability_by_rps_rule(ability_inventory.get_current_element())
+	player_state.set_last_combination(ability_inventory.get_combination())
 	FlowControllerAutoload.add_fx_to_level(FX_Helper.FX_TYPE.SWITCH_COMBINATION, global_position)
 
 func _on_switch_allow_changed(in_allowed: bool):

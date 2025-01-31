@@ -19,6 +19,7 @@ var ingame_ui: IngameUI
 var pause_menu_allowed: bool        = true
 var settings_menu_displayed: bool   = false
 var settings_menu: SettingsMenu
+var player_state: PlayerState
 
 func _ready():
 	current_pause_menu = null
@@ -45,6 +46,8 @@ func _ready():
 	settings_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	await get_tree().get_root().call_deferred("add_child", settings_menu)
 	hide_settings_menu()
+	player_state = PlayerState.new()
+	player_state.reset()
 	get_tree().create_timer(0.3).timeout.connect(_on_timeout)
 
 
@@ -163,6 +166,9 @@ func _toggle_gameover_widet(show: bool):
 		current_game_over_widget.process_mode = Node.PROCESS_MODE_ALWAYS
 		get_tree().get_root().add_child(current_game_over_widget)
 
+
+func new_game():
+	player_state.reset()
 
 func game_over():
 	get_tree().paused = true

@@ -134,3 +134,6 @@ func switch(in_element: Constants.Elements) -> bool:
 func set_combination(in_combination: ElementCombinations) -> void:
     _current_combination = in_combination
     _switch_ability(_current_combination)
+    
+func get_combination() -> ElementCombinations:
+    return _current_combination
