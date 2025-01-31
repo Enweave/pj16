@@ -19,6 +19,8 @@ radius = 7.0
 script = ExtResource("1_dacai")
 health_component = NodePath("HealthComponent")
 JUMP_FORCE = 325.0
+JUMP_NUM_MAX = 2
+JUMP_COYOTE_TIME = 0.25
 
 [node name="DefaultCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
