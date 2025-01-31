@@ -71,7 +71,7 @@ func _on_timeout():
 
 func set_current_level(current_level_in: LevelBase = null):
 	current_level = current_level_in
-	current_level.call_deferred("reparent", viewport, false)
+	current_level.call_deferred("reparent", viewport, true)
 	pause_menu_allowed = current_level.allow_pause_menu
 
 
