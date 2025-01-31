@@ -52,8 +52,6 @@ shape = SubResource("WorldBoundaryShape2D_d6qpt")
 [node name="Player" parent="." instance=ExtResource("4_343in")]
 position = Vector2(-338, 101)
 
-[node name="enemies" type="Node2D" parent="."]
-
 [node name="Tutorial" parent="." instance=ExtResource("8_e0bvx")]
 position = Vector2(-294, 102)
 text = "{input_MoveLeft}/{input_MoveRight} to move"

@@ -6,8 +6,11 @@ class_name GroundEnemyAi
 @export var vision_area: EnemySensorArea = null
 @export var attack_area: EnemySensorArea = null
 @export var current_weapon: WeaponBase = null
-@export var patrol_walk_time: float = 2
-@export var patrol_wait_time: float = 1
+
+var patrol_walk_time: float = 0.5
+var patrol_wait_time: float = 0.5
+var patrol_enabled: bool = true
+var chase_enabled: bool = true
 
 @onready var _patrol_timer: Timer = %PatrolTimer
 
@@ -44,9 +47,17 @@ func _ready() -> void:
 
         _patrol_timer.wait_time = patrol_walk_time
         _patrol_timer.timeout.connect(_on_patrol_timer_timeout)
+        if owner is GroundEnemyBase:
+            patrol_enabled = owner.patrol_enabled
+            patrol_walk_time = owner.patrol_walk_time
+            patrol_wait_time = owner.patrol_wait_time
+            chase_enabled = owner.chase_enabled
 
 
 func _on_patrol_timer_timeout() -> void:
+    if !patrol_enabled:
+        controlled_character.set_control_direction(Vector2.ZERO)
+        return
     _patrol_wait = !_patrol_wait
     if !_patrol_wait:
         _patrol_direction = -_patrol_direction
@@ -85,6 +96,9 @@ func _on_attack_sensor_exited(body) -> void:
 
 
 func _chase(_delta)-> void:
+    if !chase_enabled:
+        controlled_character.set_control_direction(Vector2.ZERO)
+        return
     if _target != null:
         var direction: Vector2 = _target.position - controlled_character.position
         direction = direction.normalized()
