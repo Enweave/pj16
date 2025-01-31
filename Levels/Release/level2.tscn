@@ -29,13 +29,12 @@ tile_map_data = PackedByteArray("AAAAAAMAAAABAAIAAAAAAAQAAAABAAIAAAABAAMAAAACAAI
 tile_set = ExtResource("3_vqenb")
 
 [node name="Player" parent="." instance=ExtResource("4_das51")]
-position = Vector2(-329, 101)
+position = Vector2(-392, 100)
 
 [node name="Killz" parent="." instance=ExtResource("5_14cri")]
 position = Vector2(0, 270)
 
 [node name="CameraBounds" parent="." instance=ExtResource("6_futco")]
-visible = false
 position = Vector2(349, 0)
 width = 1640
 
@@ -47,10 +46,11 @@ position = Vector2(-386, 0)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(-1.99969, 85)
 shape = SubResource("WorldBoundaryShape2D_gi2nq")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
-position = Vector2(7.99428, -1581)
+position = Vector2(7.99437, -1555)
 rotation = -3.14159
 shape = SubResource("WorldBoundaryShape2D_gi2nq")
 
@@ -60,7 +60,7 @@ text = "Press {input_Inventory1} to switch to Fire Form!"
 
 [node name="Tutorial2" parent="." instance=ExtResource("8_sdwro")]
 position = Vector2(635, 9)
-text = "Press {input_Inventory2} to switch back to Earth Form"
+text = "Press {input_Inventory0} to switch back to Earth Form"
 
 [node name="traps" type="Node2D" parent="."]
 
