@@ -1,13 +1,10 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://kk1r6jsfbwjt"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://kk1r6jsfbwjt"]
 
 [ext_resource type="FontFile" uid="uid://bf2ukf0ja7kmp" path="res://Assets/Fonts/rainyhearts.ttf" id="1_4dsiv"]
 [ext_resource type="StyleBox" uid="uid://2xwscq7m0ruv" path="res://UI/button_stylebox.tres" id="1_so5tc"]
 [ext_resource type="StyleBox" uid="uid://dtm3natum5a0g" path="res://UI/button_focus.tres" id="2_ja6es"]
 [ext_resource type="StyleBox" uid="uid://cgedxk8r0ckfq" path="res://UI/button_hover.tres" id="3_x63vn"]
 [ext_resource type="StyleBox" uid="uid://cvmaul8e4tcnt" path="res://UI/button_pressed.tres" id="5_mtolo"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyno8"]
-bg_color = Color(0.976638, 0.341791, 0.487663, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dy1wl"]
 content_margin_left = 10.0
@@ -20,7 +17,6 @@ bg_color = Color(0.0627451, 0.0705882, 0.0901961, 1)
 bg_color = Color(0.0627451, 0.0705882, 0.0901961, 1)
 
 [resource]
-AcceptDialog/styles/embedded_border = SubResource("StyleBoxFlat_jyno8")
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_dy1wl")
 Button/fonts/font = ExtResource("1_4dsiv")
 Button/styles/focus = ExtResource("2_ja6es")
