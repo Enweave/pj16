@@ -6,7 +6,7 @@ class_name GroundEnemyBase
 @export var patrol_walk_time: float = 2
 @export var patrol_wait_time: float = 1
 @export var chase_enabled: bool = true
-
+@export var score_cost: int = 100
 
 func _ready() -> void:
     super._ready()
@@ -15,3 +15,4 @@ func _ready() -> void:
 
 func _on_death() -> void:
     call_deferred("queue_free")
+    FlowControllerAutoload.earn_score(score_cost)

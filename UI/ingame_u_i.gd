@@ -5,7 +5,7 @@ class_name IngameUI
 var health_label: Label
 var mana_label: Label
 var current_element_label: Label
-
+var score: int = 0
 var player_character: PlayerCharacter
 
 func toggle_visibility(in_visible: bool) -> void:
@@ -42,3 +42,7 @@ func update_elements_ui() -> void:
 	
 func _update_health_display(_amount: float = 0, _in_element = null) -> void:
 	health_label.text = str(player_character.health_component.current_health)
+
+func set_score(in_score: int) -> void:
+	score = in_score
+	%ScoreValue.text = str(score)

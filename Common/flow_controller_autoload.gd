@@ -20,6 +20,7 @@ var pause_menu_allowed: bool        = true
 var settings_menu_displayed: bool   = false
 var settings_menu: SettingsMenu
 var player_state: PlayerState
+var score: int = 0
 
 func _ready():
 	current_pause_menu = null
@@ -114,6 +115,9 @@ func add_fx_to_level(in_fx: FX_Helper.FX_TYPE, in_position: Vector2, in_scale: V
 	
 
 func _load_level(level_path: String):
+	score = player_state.get_score()
+	if ingame_ui != null:
+		ingame_ui.set_score(score)
 	var tween: Tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(viewport_container, 'modulate:a', 0, FADE_DURATION)
@@ -139,7 +143,9 @@ func _load_level(level_path: String):
 	tween.tween_property(viewport_container, 'modulate:a', 1, FADE_DURATION)
 	
 
-func load_next_level():
+func load_next_level(commit_score: bool = false):
+	if commit_score:
+		player_state.set_score(score)
 	if next_level_scene_path != "":
 		_load_level(next_level_scene_path)
 	else:
@@ -204,3 +210,7 @@ func handle_pause_input():
 		hide_settings_menu()
 	else:
 		toggle_pause_game()
+
+func earn_score(in_score: int):
+	score += in_score
+	ingame_ui.set_score(score)
