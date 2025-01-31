@@ -13,7 +13,7 @@ var _active: bool          = false
 var _trigger_down: bool    = false
 var _locked: bool          = false
 var _animation_string_name: String = ""
-
+@export var sfx_player: RandomSFXPlayer = null
 
 signal Windup
 signal Activation
@@ -154,6 +154,8 @@ func _activate() -> void:
 
 func _on_wind_up_timer_timeout() -> void:
 	Activation.emit()
+	if sfx_player != null:
+		sfx_player.play_random_sound()
 	if _cooldown_time > 0:
 		_cooldown_timer.start()
 	else:
@@ -166,7 +168,7 @@ func _on_cooldown_timer_timeout() -> void:
 	if _locked:
 		_active = false
 		return
-
+		
 	if _auto_reactivate and _trigger_down:
 		_activate()
 	else:

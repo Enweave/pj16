@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cax7o3s63lcar"]
+[gd_scene load_steps=12 format=3 uid="uid://cax7o3s63lcar"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/player_character.gd" id="1_dacai"]
 [ext_resource type="PackedScene" uid="uid://dgwglquecixj4" path="res://Actors/Characters/Player/wall_jump_sensor.tscn" id="2_bvw8n"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c8lwptut6kpw1" path="res://Actors/Characters/Player/Abilities/earth_ability.tscn" id="5_oijrf"]
 [ext_resource type="Script" path="res://Common/Framework/health_component.gd" id="7_fruwb"]
 [ext_resource type="PackedScene" uid="uid://bdyajfmyarmem" path="res://Actors/Characters/Player/Abilities/fire_ability.tscn" id="7_ufwnj"]
+[ext_resource type="Script" path="res://Sound/RandomSFXPlayer.gd" id="9_qm1hr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o13gm"]
 radius = 6.0
@@ -15,9 +16,10 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_14qkm"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "damage_sfx_player") groups=["player"]]
 script = ExtResource("1_dacai")
 health_component = NodePath("HealthComponent")
+damage_sfx_player = NodePath("RandomSFXPlayer")
 JUMP_FORCE = 325.0
 JUMP_NUM_MAX = 2
 JUMP_COYOTE_TIME = 0.25
@@ -63,3 +65,12 @@ position = Vector2(0, -9)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_fruwb")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+unique_name_in_owner = true
+current = true
+
+[node name="RandomSFXPlayer" type="Node2D" parent="."]
+script = ExtResource("9_qm1hr")
+files = Array[String](["res://Sound/sfx/damage/damage Master-bounce-1.mp3", "res://Sound/sfx/damage/damage Master-bounce-2.mp3", "res://Sound/sfx/damage/damage Master-bounce-3.mp3", "res://Sound/sfx/damage/damage Master-bounce-4.mp3", "res://Sound/sfx/damage/damage Master-bounce-5.mp3"])
+directory = "res://Sound/sfx/damage"

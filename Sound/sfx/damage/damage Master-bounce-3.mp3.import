@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d06g7vofni1sy"
+path="res://.godot/imported/damage Master-bounce-3.mp3-76f8c846988435531ea35c726fd1f5b5.mp3str"
+
+[deps]
+
+source_file="res://Sound/sfx/damage/damage Master-bounce-3.mp3"
+dest_files=["res://.godot/imported/damage Master-bounce-3.mp3-76f8c846988435531ea35c726fd1f5b5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8lwptut6kpw1"]
+[gd_scene load_steps=4 format=3 uid="uid://c8lwptut6kpw1"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/Abilities/earth_ability.gd" id="1_kv17q"]
 [ext_resource type="PackedScene" uid="uid://bdhvalfa3c01j" path="res://Actors/Characters/Player/Abilities/earth_projectile.tscn" id="2_ckbv3"]
+[ext_resource type="Script" path="res://Sound/RandomSFXPlayer.gd" id="3_edj3l"]
 
-[node name="EarthAbility" type="Node2D"]
+[node name="EarthAbility" type="Node2D" node_paths=PackedStringArray("sfx_player")]
 script = ExtResource("1_kv17q")
 projectile_scene = ExtResource("2_ckbv3")
 element = 3
 cooldown_time = 0.5
+sfx_player = NodePath("RandomSFXPlayer")
+
+[node name="RandomSFXPlayer" type="Node2D" parent="."]
+script = ExtResource("3_edj3l")
+files = Array[String](["res://Sound/sfx/toss/toss Master-bounce-1.mp3", "res://Sound/sfx/toss/toss Master-bounce-2.mp3", "res://Sound/sfx/toss/toss Master-bounce-3.mp3", "res://Sound/sfx/toss/toss Master-bounce-4.mp3"])
+directory = "res://Sound/sfx/toss"

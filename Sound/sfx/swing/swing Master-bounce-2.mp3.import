@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dptvqdthhodh2"
+path="res://.godot/imported/swing Master-bounce-2.mp3-78772c15a8105d8e119d7454781acf9a.mp3str"
+
+[deps]
+
+source_file="res://Sound/sfx/swing/swing Master-bounce-2.mp3"
+dest_files=["res://.godot/imported/swing Master-bounce-2.mp3-78772c15a8105d8e119d7454781acf9a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

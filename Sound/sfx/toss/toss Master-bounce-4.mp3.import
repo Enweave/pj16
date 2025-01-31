@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cdyogd653dv4q"
+path="res://.godot/imported/toss Master-bounce-4.mp3-bf994425873dc9d4174baa6957bc443e.mp3str"
+
+[deps]
+
+source_file="res://Sound/sfx/toss/toss Master-bounce-4.mp3"
+dest_files=["res://.godot/imported/toss Master-bounce-4.mp3-bf994425873dc9d4174baa6957bc443e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

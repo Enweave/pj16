@@ -49,6 +49,7 @@ func _ready():
 	var viewport_size: Vector2 = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 	viewport.size = viewport_size
+	viewport.audio_listener_enable_2d = true
 	viewport.handle_input_locally = true
 	viewport.canvas_item_default_texture_filter = 0 # DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST 
 

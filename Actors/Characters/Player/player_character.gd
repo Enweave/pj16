@@ -58,6 +58,10 @@ func _ready() -> void:
 	health_component.OnDeath.connect(_on_death)
 	JumpStarted.connect(_on_jump_started)
 	
+#	await get_tree().create_timer(2.3).timeout
+#	var l = %AudioListener2D as AudioListener2D
+#	l.make_current()
+	
 	
 func _on_switch_combination():
 	health_component.set_vulnerability_by_rps_rule(ability_inventory.get_current_element())

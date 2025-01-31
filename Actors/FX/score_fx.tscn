@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2duvme2ho8i7"]
+[gd_scene load_steps=6 format=3 uid="uid://c2duvme2ho8i7"]
 
 [ext_resource type="Script" path="res://Actors/FX/score_fx.gd" id="1_d2ar8"]
+[ext_resource type="AudioStream" uid="uid://1raiyd4vt7bo" path="res://Sound/sfx/score/score Master-bounce-1.mp3" id="2_2c3rk"]
 
 [sub_resource type="Animation" id="Animation_4fkml"]
 length = 0.001
@@ -87,3 +88,8 @@ libraries = {
 "": SubResource("AnimationLibrary_cvgsy")
 }
 autoplay = "new_animation"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_2c3rk")
+autoplay = true
+bus = &"SFX"

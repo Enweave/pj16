@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c72ql5umvpky8"
+path="res://.godot/imported/damage Master-bounce-5.mp3-b92e8111a27d5d20cefbb02af49096c0.mp3str"
+
+[deps]
+
+source_file="res://Sound/sfx/damage/damage Master-bounce-5.mp3"
+dest_files=["res://.godot/imported/damage Master-bounce-5.mp3-b92e8111a27d5d20cefbb02af49096c0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

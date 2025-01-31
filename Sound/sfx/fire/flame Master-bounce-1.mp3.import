@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dp8ds2784mvix"
+path="res://.godot/imported/flame Master-bounce-1.mp3-6a20fc4d3d287d7bcab0bf3ee3920d28.mp3str"
+
+[deps]
+
+source_file="res://Sound/sfx/fire/flame Master-bounce-1.mp3"
+dest_files=["res://.godot/imported/flame Master-bounce-1.mp3-6a20fc4d3d287d7bcab0bf3ee3920d28.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

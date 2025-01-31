@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 class_name SFXPlayerBase
 
@@ -36,7 +36,6 @@ func _create_new_player():
 	audio_stream_player.autoplay = false
 	audio_stream_player.bus = bus_name
 	audio_stream_player.volume_db = volume_db
-
 #	audio_stream_player.max_db = max_db
 #	audio_stream_player.unit_size = unit_size
 

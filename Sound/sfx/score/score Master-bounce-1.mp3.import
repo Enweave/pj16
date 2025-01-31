@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1raiyd4vt7bo"
+path="res://.godot/imported/score Master-bounce-1.mp3-15ca53ab1409bf44a4e5aa5cb2eab8b0.mp3str"
+
+[deps]
+
+source_file="res://Sound/sfx/score/score Master-bounce-1.mp3"
+dest_files=["res://.godot/imported/score Master-bounce-1.mp3-15ca53ab1409bf44a4e5aa5cb2eab8b0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
