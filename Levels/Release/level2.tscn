@@ -58,6 +58,10 @@ shape = SubResource("WorldBoundaryShape2D_gi2nq")
 position = Vector2(-182, 83)
 text = "Press {input_Inventory1} to switch to Fire Form!"
 
+[node name="Tutorial2" parent="." instance=ExtResource("8_sdwro")]
+position = Vector2(635, 9)
+text = "Press {input_Inventory2} to switch back to Earth Form"
+
 [node name="traps" type="Node2D" parent="."]
 
 [node name="ContactDamageTrap" parent="traps" instance=ExtResource("9_2ehv1")]
@@ -84,9 +88,10 @@ patrol_enabled = false
 chase_enabled = false
 
 [node name="BowEnemy2" parent="." instance=ExtResource("9_mvyps")]
-position = Vector2(582, 30)
+position = Vector2(557, 66)
 patrol_enabled = false
 
 [node name="StaffEnemy" parent="." instance=ExtResource("11_tkg5f")]
-position = Vector2(878, -3)
+position = Vector2(864, 2)
 patrol_enabled = false
+chase_enabled = false

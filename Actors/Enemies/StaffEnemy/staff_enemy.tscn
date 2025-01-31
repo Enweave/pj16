@@ -15,10 +15,10 @@ health_component = NodePath("HealthComponent")
 [node name="GroundEnemyBody" parent="." instance=ExtResource("2_hwgev")]
 
 [node name="VisionArea" parent="." instance=ExtResource("3_evd3v")]
-vision_radius = 150.0
+vision_radius = 160.0
 
 [node name="AttackSensorArea" parent="." instance=ExtResource("3_evd3v")]
-vision_radius = 100.0
+vision_radius = 150.0
 
 [node name="GroundEnemyAi" parent="." node_paths=PackedStringArray("vision_area", "attack_area", "current_weapon") instance=ExtResource("4_cidc4")]
 vision_area = NodePath("../VisionArea")
