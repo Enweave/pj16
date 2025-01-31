@@ -1,13 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://co2o6cog4q2pu"]
+[gd_scene load_steps=7 format=3 uid="uid://co2o6cog4q2pu"]
 
 [ext_resource type="Script" path="res://Levels/System/main_menu_level.gd" id="1_d4rfw"]
 [ext_resource type="PackedScene" uid="uid://d0u165lvgm11o" path="res://Levels/Release/level1.tscn" id="2_bi4r3"]
 [ext_resource type="FontFile" uid="uid://6gg0wkbn7f5k" path="res://Assets/Fonts/Retro Gaming.ttf" id="3_s7p1p"]
+[ext_resource type="Texture2D" uid="uid://csf57e8ac55rd" path="res://Assets/Backgrounds/main/BG.png" id="3_tbcfr"]
+[ext_resource type="Texture2D" uid="uid://cu60r8wyvoj0f" path="res://Assets/Backgrounds/main/clouds.png" id="4_g75gl"]
+[ext_resource type="Texture2D" uid="uid://b6aqm0ahudgx7" path="res://Assets/Backgrounds/main/Text.png" id="5_1y2ve"]
 
 [node name="MainMenuLevel" type="Node"]
 script = ExtResource("1_d4rfw")
 next_level_scene = ExtResource("2_bi4r3")
 allow_pause_menu = false
+
+[node name="Bg" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.435294)
+texture = ExtResource("3_tbcfr")
+centered = false
+
+[node name="Bg2" type="Sprite2D" parent="."]
+texture = ExtResource("4_g75gl")
+offset = Vector2(240, 104.94)
+
+[node name="Bg3" type="Sprite2D" parent="."]
+position = Vector2(118, 30)
+texture = ExtResource("5_1y2ve")
+offset = Vector2(120, 50)
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -25,7 +42,9 @@ size_flags_vertical = 4
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_s7p1p")
 theme_override_font_sizes/font_size = 24
-text = "Entato Lelementals
+text = "
+
+
 
 "
 horizontal_alignment = 1

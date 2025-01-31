@@ -22,6 +22,15 @@ var settings_menu: SettingsMenu
 var player_state: PlayerState
 var score: int = 0
 
+
+func start_music():
+	var music_player: AudioStreamPlayer = AudioStreamPlayer.new()
+	music_player.stream = load("res://Sound/tracks/pj16-main.mp3")
+	music_player.set_bus("Music")
+	music_player.autoplay = true
+	get_tree().get_root().call_deferred("add_child", music_player)
+	
+
 func _ready():
 	current_pause_menu = null
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -50,6 +59,7 @@ func _ready():
 	player_state = PlayerState.new()
 	player_state.reset()
 	get_tree().create_timer(0.3).timeout.connect(_on_timeout)
+	start_music()
 
 
 func _on_timeout():
