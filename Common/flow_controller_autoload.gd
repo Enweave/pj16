@@ -26,6 +26,7 @@ var score: int = 0
 func start_music():
 	var music_player: AudioStreamPlayer = AudioStreamPlayer.new()
 	music_player.stream = load("res://Sound/tracks/pj16-main.mp3")
+	music_player.process_mode = Node.PROCESS_MODE_ALWAYS
 	music_player.set_bus("Music")
 	music_player.autoplay = true
 	get_tree().get_root().call_deferred("add_child", music_player)

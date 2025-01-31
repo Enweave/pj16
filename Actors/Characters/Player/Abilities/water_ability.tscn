@@ -1,7 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgvyh152pr2ud"]
+[gd_scene load_steps=3 format=3 uid="uid://dgvyh152pr2ud"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/Abilities/water_ability.gd" id="1_q0jnw"]
+[ext_resource type="Script" path="res://Sound/RandomSFXPlayer.gd" id="2_0py6e"]
 
-[node name="WaterAbility" type="Node2D"]
+[node name="WaterAbility" type="Node2D" node_paths=PackedStringArray("sfx_player")]
 script = ExtResource("1_q0jnw")
 slide_speed = null
+sfx_player = NodePath("RandomSFXPlayer")
+
+[node name="RandomSFXPlayer" type="Node2D" parent="."]
+script = ExtResource("2_0py6e")
+files = Array[String](["res://Sound/sfx/toss/toss Master-bounce-1.mp3", "res://Sound/sfx/toss/toss Master-bounce-2.mp3", "res://Sound/sfx/toss/toss Master-bounce-3.mp3", "res://Sound/sfx/toss/toss Master-bounce-4.mp3"])
+directory = "res://Sound/sfx/toss"

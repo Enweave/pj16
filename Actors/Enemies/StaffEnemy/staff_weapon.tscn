@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bu57f8x7qy7pt"]
+[gd_scene load_steps=12 format=3 uid="uid://bu57f8x7qy7pt"]
 
 [ext_resource type="Script" path="res://Common/Framework/Combat/ranged_weapon_base.gd" id="1_d2yag"]
 [ext_resource type="Texture2D" uid="uid://bdhwqadbu5t0y" path="res://Assets/SpriteSheets/Weapons/Staff-SheetFlip.png" id="2_r0xi0"]
 [ext_resource type="PackedScene" uid="uid://b4yi0mr3i071m" path="res://Actors/Enemies/StaffEnemy/staff_projectile.tscn" id="2_tmuh2"]
+[ext_resource type="Script" path="res://Sound/RandomSFXPlayer.gd" id="4_2lw8b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c1ya5"]
 atlas = ExtResource("2_r0xi0")
@@ -64,7 +65,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="StaffWeapon" type="Node2D" node_paths=PackedStringArray("weapon_sprite_origin", "weapon_sprite")]
+[node name="StaffWeapon" type="Node2D" node_paths=PackedStringArray("weapon_sprite_origin", "weapon_sprite", "sfx_player")]
 script = ExtResource("1_d2yag")
 projectile_scene = ExtResource("2_tmuh2")
 damage = 2.0
@@ -72,6 +73,7 @@ windup_time = 0.15
 cooldown_time = 0.5
 weapon_sprite_origin = NodePath("SpriteOrigin")
 weapon_sprite = NodePath("SpriteOrigin/AnimatedSprite2D")
+sfx_player = NodePath("RandomSFXPlayer")
 
 [node name="SpriteOrigin" type="Node2D" parent="."]
 
@@ -93,3 +95,8 @@ grow_vertical = 2
 size_flags_horizontal = 4
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RandomSFXPlayer" type="Node2D" parent="."]
+script = ExtResource("4_2lw8b")
+files = Array[String](["res://Sound/sfx/toss/toss Master-bounce-1.mp3", "res://Sound/sfx/toss/toss Master-bounce-2.mp3", "res://Sound/sfx/toss/toss Master-bounce-3.mp3", "res://Sound/sfx/toss/toss Master-bounce-4.mp3"])
+directory = "res://Sound/sfx/toss"

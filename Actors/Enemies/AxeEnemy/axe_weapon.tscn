@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cefxpjw7s6v4e"]
+[gd_scene load_steps=11 format=3 uid="uid://cefxpjw7s6v4e"]
 
 [ext_resource type="Script" path="res://Common/Framework/Combat/melee_weapon_base.gd" id="1_2fftd"]
+[ext_resource type="Script" path="res://Sound/RandomSFXPlayer.gd" id="3_7ysfx"]
 [ext_resource type="Texture2D" uid="uid://b3kwj2pllw4hf" path="res://Assets/SpriteSheets/Weapons/Axe-SheetFliph.png" id="3_ph346"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vu14k"]
@@ -59,7 +60,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_gybrj"]
 radius = 22.0
 
-[node name="AxeWeapon" type="Node2D" node_paths=PackedStringArray("hitbox_origin", "hitbox", "weapon_sprite_origin", "weapon_sprite")]
+[node name="AxeWeapon" type="Node2D" node_paths=PackedStringArray("hitbox_origin", "hitbox", "weapon_sprite_origin", "weapon_sprite", "sfx_player")]
 script = ExtResource("1_2fftd")
 hitbox_origin = NodePath("HitboxOrigin")
 hitbox = NodePath("HitboxOrigin/Area2D")
@@ -68,6 +69,7 @@ windup_time = 0.25
 cooldown_time = 0.7
 weapon_sprite_origin = NodePath("SpriteOrigin")
 weapon_sprite = NodePath("SpriteOrigin/AnimatedSprite2D")
+sfx_player = NodePath("RandomSFXPlayer")
 
 [node name="SpriteOrigin" type="Node2D" parent="."]
 
@@ -99,3 +101,8 @@ grow_vertical = 2
 size_flags_horizontal = 4
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RandomSFXPlayer" type="Node2D" parent="."]
+script = ExtResource("3_7ysfx")
+files = Array[String](["res://Sound/sfx/swing/swing Master-bounce-1.mp3", "res://Sound/sfx/swing/swing Master-bounce-2.mp3", "res://Sound/sfx/swing/swing Master-bounce-3.mp3", "res://Sound/sfx/swing/swing Master-bounce-4.mp3", "res://Sound/sfx/swing/swing Master-bounce-5.mp3"])
+directory = "res://Sound/sfx/swing"

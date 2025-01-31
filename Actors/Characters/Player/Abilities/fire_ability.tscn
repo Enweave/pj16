@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdyajfmyarmem"]
+[gd_scene load_steps=11 format=3 uid="uid://bdyajfmyarmem"]
 
 [ext_resource type="Script" path="res://Actors/Characters/Player/Abilities/fire_ability.gd" id="1_gsjsc"]
 [ext_resource type="Texture2D" uid="uid://cybxjpr3fnhh8" path="res://Assets/SpriteSheets/Player/Flamethrower-Sheet.png" id="2_rufqc"]
+[ext_resource type="Script" path="res://Sound/RandomSFXPlayer.gd" id="3_fpopd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38vg0"]
 atlas = ExtResource("2_rufqc")
@@ -49,7 +50,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03bi2"]
 size = Vector2(29, 19)
 
-[node name="FireAbility" type="Node2D" node_paths=PackedStringArray("hitbox_origin", "hitbox")]
+[node name="FireAbility" type="Node2D" node_paths=PackedStringArray("hitbox_origin", "hitbox", "sfx_player")]
 script = ExtResource("1_gsjsc")
 hitbox_origin = NodePath("HitboxOrigin")
 hitbox = NodePath("HitboxOrigin/Area2D")
@@ -57,6 +58,7 @@ damage = 2.0
 element = 1
 windup_time = 0.0
 full_auto = true
+sfx_player = NodePath("RandomSFXPlayer")
 
 [node name="HitboxOrigin" type="Node2D" parent="."]
 
@@ -74,3 +76,8 @@ frame_progress = 0.274497
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxOrigin/Area2D"]
 position = Vector2(14.5, 0.5)
 shape = SubResource("RectangleShape2D_03bi2")
+
+[node name="RandomSFXPlayer" type="Node2D" parent="."]
+script = ExtResource("3_fpopd")
+files = Array[String](["res://Sound/sfx/fire/flame Master-bounce-1.mp3", "res://Sound/sfx/fire/flame Master-bounce-2.mp3", "res://Sound/sfx/fire/flame Master-bounce-3.mp3", "res://Sound/sfx/fire/flame Master-bounce-4.mp3"])
+directory = "res://Sound/sfx/fire"
